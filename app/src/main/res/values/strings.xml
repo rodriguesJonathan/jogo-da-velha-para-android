@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Jogo da Velha</string>
+    <string name="nome_botao1">reiniciar</string>
 </resources>
