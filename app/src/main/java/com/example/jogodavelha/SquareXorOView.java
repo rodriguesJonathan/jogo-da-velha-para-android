@@ -2,14 +2,13 @@ package com.example.jogodavelha;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.view.View;
 
-public class SquareXorOView extends androidx.appcompat.widget.AppCompatImageView implements Drawable.Callback {
+public class SquareXorOView extends androidx.appcompat.widget.AppCompatImageView {
     private DisplayMetrics displayMetrics;
     private char letraAtual;
+    public static byte vezesPreenchida = 0;
 
     public SquareXorOView(Context context) {
         super(context);
@@ -52,5 +51,6 @@ public class SquareXorOView extends androidx.appcompat.widget.AppCompatImageView
     public void setLetraAtual(char letraAtual) {
         this.letraAtual = letraAtual;
     }
+
 
 }
