@@ -3,12 +3,16 @@ package com.example.jogodavelha;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
     private char letraGlobalAtual;
     private SquareXorOView tabela11, tabela12, tabela13, tabela21, tabela22, tabela23, tabela31, tabela32, tabela33;
+    SquareXorOView[] imagemVermelhas;
     private boolean ganhou;
 
     @Override
@@ -28,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
             image.setLetraAtual(this.letraGlobalAtual);
             SquareXorOView.vezesPreenchida += 1;
             if (this.letraGlobalAtual == 'x' && !ganhou){
-                image.setImageResource(R.drawable.letter_x);
+                image.setImageResource(R.drawable.ic_x_letter_svg);
             }else if(this.letraGlobalAtual == 'o' && !ganhou){
-                image.setImageResource(R.drawable.letter_o);
+                image.setImageResource(R.drawable.ic_o_letter_svg);
             }
             verificarVencedor(image);
             this.letraGlobalAtual = this.letraGlobalAtual == 'x' ? 'o' : 'x';
@@ -47,11 +51,18 @@ public class MainActivity extends AppCompatActivity {
         }
         ganhou = false;
         this.letraGlobalAtual = 'x';
+
+
+        if (SquareXorOView.vezesPreenchida > 0 && imagemVermelhas[0] != null){
+            for(SquareXorOView imagemVermelha : imagemVermelhas){
+                imagemVermelha.setColorFilter(Color.BLACK);
+            }
+        }
         SquareXorOView.vezesPreenchida = 0;
     }
 
     public void verificarVencedor(SquareXorOView obj) {
-        SquareXorOView[] imagemVermelhas = new SquareXorOView[3];
+        imagemVermelhas = new SquareXorOView[3];
         if (obj.getId() == R.id.tabela11){//Linha 1 coluna 1 (ponta 1)
             if (coluna1EstaIgual()){
                 imagemVermelhas[0] = tabela11;
@@ -169,18 +180,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (imagemVermelhas[0] != null){
-            if (letraGlobalAtual == 'x'){
-                for(SquareXorOView imagemVermelha : imagemVermelhas){
-                    imagemVermelha.setImageResource(R.drawable.red_letter_x);
-                }
-            }else{
-                for(SquareXorOView imagemVermelha : imagemVermelhas){
-                    imagemVermelha.setImageResource(R.drawable.red_letter_o);
-                }
-            }
             ganhou = true;
+            for(SquareXorOView imagemVermelha : imagemVermelhas){
+               imagemVermelha.setColorFilter(Color.RED);
+            }
         }
         if (SquareXorOView.vezesPreenchida == 9){
+
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
 
             dialog.setTitle("Deu velha!!");

@@ -36,6 +36,7 @@
         android:layout_width="86dp"
         android:layout_height="83dp"
         android:background="@drawable/vazio"
+        android:fillColor="#FF000000"
         android:onClick="inserirXO"
         app:layout_constraintBottom_toBottomOf="@+id/squareImageView"
         app:layout_constraintEnd_toEndOf="@+id/squareImageView"
