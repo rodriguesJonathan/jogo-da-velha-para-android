@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Jogo da Velha</string>
     <string name="nome_botao1">reiniciar</string>
+    <string name="boas_vindas">Seja muito bem-vindo(a) ao jogo da velha</string>
+    <string name="opcao_jogo_1">Jogo offline a 2</string>
+    <string name="texto_jogador1">O Jogador 1 será: X</string>
+    <string name="texto_jogador2">O Jogador 2 será: O</string>
+    <string name="switch_inverter_simbolo">trocar simbolos</string>
+    <string name="switch_O_comeca">"O" inicia o jogo</string>
+    <string name="hint_name">Digite o teu nome</string>
 </resources>

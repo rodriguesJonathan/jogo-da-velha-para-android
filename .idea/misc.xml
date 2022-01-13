@@ -7,7 +7,10 @@
         <entry key="..\:/Users/Jonat/Documents/Android/jogo-da-velha-para-android/app/src/main/res/drawable/ic_o_letter_svg.xml" value="0.1265625" />
         <entry key="..\:/Users/Jonat/Documents/Android/jogo-da-velha-para-android/app/src/main/res/drawable/ic_x_letter_svg.xml" value="0.1265625" />
         <entry key="..\:/Users/Jonat/Documents/Android/jogo-da-velha-para-android/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/layout/activity_game.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_input_name.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_optional_first.xml" value="0.5" />
       </map>
     </option>
   </component>

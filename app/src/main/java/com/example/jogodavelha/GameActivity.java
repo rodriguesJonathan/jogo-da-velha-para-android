@@ -3,22 +3,26 @@ package com.example.jogodavelha;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity {
     private char letraGlobalAtual;
     private SquareXorOView tabela11, tabela12, tabela13, tabela21, tabela22, tabela23, tabela31, tabela32, tabela33;
     SquareXorOView[] imagemVermelhas;
     private boolean ganhou;
 
     @Override
+    public Context getApplicationContext() {
+        return super.getApplicationContext();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_game);
         letraGlobalAtual = 'x';
         tabela11 = findViewById(R.id.tabela11); tabela12 = findViewById(R.id.tabela12); tabela13 = findViewById(R.id.tabela13);
         tabela21 = findViewById(R.id.tabela21); tabela22 = findViewById(R.id.tabela22); tabela23 = findViewById(R.id.tabela23);
@@ -185,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
                imagemVermelha.setColorFilter(Color.RED);
             }
         }
-        if (SquareXorOView.vezesPreenchida == 9){
+        if (!ganhou && SquareXorOView.vezesPreenchida == 9){
 
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
 
