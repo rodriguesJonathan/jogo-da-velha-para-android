@@ -2,68 +2,51 @@ package com.example.jogodavelha;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 public class GameActivity extends AppCompatActivity {
-    private char letraGlobalAtual;
-    private SquareXorOView tabela11, tabela12, tabela13, tabela21, tabela22, tabela23, tabela31, tabela32, tabela33;
-    SquareXorOView[] imagemVermelhas;
-    private boolean ganhou;
+    protected SquareXorOView[] imagemVermelhas;
+    protected boolean alguemGanhou;
+    protected int vezesPreenchidas;
 
-    @Override
-    public Context getApplicationContext() {
-        return super.getApplicationContext();
-    }
 
-    @Override
+    protected TextView textVezDoJogador;
+
+
+
+    protected SquareXorOView
+            tabela11, tabela12, tabela13,
+    tabela21, tabela22, tabela23,
+    tabela31, tabela32, tabela33;
+    protected SquareXorOView[]  camposTabela;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        letraGlobalAtual = 'x';
+
         tabela11 = findViewById(R.id.tabela11); tabela12 = findViewById(R.id.tabela12); tabela13 = findViewById(R.id.tabela13);
         tabela21 = findViewById(R.id.tabela21); tabela22 = findViewById(R.id.tabela22); tabela23 = findViewById(R.id.tabela23);
         tabela31 = findViewById(R.id.tabela31); tabela32 = findViewById(R.id.tabela32); tabela33 = findViewById(R.id.tabela33);
-        ganhou = false;
+        camposTabela = new SquareXorOView[]{tabela11, tabela12, tabela13, tabela21,
+                tabela22, tabela23, tabela31, tabela32, tabela33};
+        textVezDoJogador = findViewById(R.id.textVezDoJogador);
+
+        SquareMatrixView tabuleiro = findViewById(R.id.squareImageView);
     }
 
+
     public void inserirXO(View view){
-        SquareXorOView image = findViewById(view.getId());
-        if (image.getLetraAtual() == '_' && !ganhou){
-            image.setLetraAtual(this.letraGlobalAtual);
-            SquareXorOView.vezesPreenchida += 1;
-            if (this.letraGlobalAtual == 'x' && !ganhou){
-                image.setImageResource(R.drawable.ic_x_letter_svg);
-            }else if(this.letraGlobalAtual == 'o' && !ganhou){
-                image.setImageResource(R.drawable.ic_o_letter_svg);
-            }
-            verificarVencedor(image);
-            this.letraGlobalAtual = this.letraGlobalAtual == 'x' ? 'o' : 'x';
-        }
+
+
     }
 
     public void reiniciarJogo (View view){
 
-        SquareXorOView[] camposTabela = {this.tabela11, this.tabela12, this.tabela13, this.tabela21,
-                this.tabela22, this.tabela23, this.tabela31, this.tabela32, this.tabela33};
-        for (SquareXorOView campo : camposTabela) {
-            campo.setImageResource(R.drawable.vazio);
-            campo.setLetraAtual('_');
-        }
-        ganhou = false;
-        this.letraGlobalAtual = 'x';
-
-
-        if (SquareXorOView.vezesPreenchida > 0 && imagemVermelhas[0] != null){
-            for(SquareXorOView imagemVermelha : imagemVermelhas){
-                imagemVermelha.setColorFilter(Color.BLACK);
-            }
-        }
-        SquareXorOView.vezesPreenchida = 0;
     }
+
 
     public void verificarVencedor(SquareXorOView obj) {
         imagemVermelhas = new SquareXorOView[3];
@@ -184,55 +167,60 @@ public class GameActivity extends AppCompatActivity {
         }
 
         if (imagemVermelhas[0] != null){
-            ganhou = true;
+            textVezDoJogador.setText("Opa! Temos um vencedor");
+            alguemGanhou = true;
             for(SquareXorOView imagemVermelha : imagemVermelhas){
                imagemVermelha.setColorFilter(Color.RED);
             }
+
+            informarVencedor();
         }
-        if (!ganhou && SquareXorOView.vezesPreenchida == 9){
+        if (!alguemGanhou && this.vezesPreenchidas == 9){
 
-            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            informarEmpate();
 
-            dialog.setTitle("Deu velha!!");
-            dialog.setMessage("Vocês devem ter o mesmo QI.");
-
-            dialog.setPositiveButton("Avançar", null);
-
-            dialog.create();
-            dialog.show();
         }
     }
 
+    protected void informarVencedor(){
+
+    }
+
+    protected void informarEmpate(){
+
+    }
+
+
     public boolean coluna1EstaIgual(){
-        char letra11 = tabela11.getLetraAtual(), letra21 = tabela21.getLetraAtual(), letra31 = tabela31.getLetraAtual();
+        char letra11 = this.tabela11.getLetraAtual(), letra21 = this.tabela21.getLetraAtual(), letra31 = this.tabela31.getLetraAtual();
         return letra11 == letra21 && letra11 == letra31;
     }
     public boolean coluna2EstaIgual(){
-        char letra12 = tabela12.getLetraAtual(), letra22 = tabela22.getLetraAtual(), letra32 = tabela32.getLetraAtual();
+        char letra12 = this.tabela12.getLetraAtual(), letra22 = this.tabela22.getLetraAtual(), letra32 = this.tabela32.getLetraAtual();
         return letra12 == letra22 && letra12 == letra32;
     }
     public boolean coluna3EstaIgual(){
-        char letra13 = tabela13.getLetraAtual(), letra23 = tabela23.getLetraAtual(), letra33 = tabela33.getLetraAtual();
+        char letra13 = this.tabela13.getLetraAtual(), letra23 = this.tabela23.getLetraAtual(), letra33 = this.tabela33.getLetraAtual();
         return letra13 == letra23 && letra13 == letra33;
     }
     public boolean linha1EstaIgual(){
-        char letra11 = tabela11.getLetraAtual(), letra12 = tabela12.getLetraAtual(), letra13 = tabela13.getLetraAtual();
+        char letra11 = this.tabela11.getLetraAtual(), letra12 = this.tabela12.getLetraAtual(), letra13 = this.tabela13.getLetraAtual();
         return letra11 == letra12 && letra11 == letra13;
     }
     public boolean linha2EstaIgual(){
-        char letra21 = tabela21.getLetraAtual(), letra22 = tabela22.getLetraAtual(), letra23 = tabela23.getLetraAtual();
+        char letra21 = this.tabela21.getLetraAtual(), letra22 = this.tabela22.getLetraAtual(), letra23 = this.tabela23.getLetraAtual();
         return letra21 == letra22 && letra21 == letra23;
     }
     public boolean linha3EstaIgual(){
-        char letra31 = tabela31.getLetraAtual(), letra32 = tabela32.getLetraAtual(), letra33 = tabela33.getLetraAtual();
+        char letra31 = this.tabela31.getLetraAtual(), letra32 = this.tabela32.getLetraAtual(), letra33 = this.tabela33.getLetraAtual();
         return letra31 == letra32 && letra31 == letra33;
     }
     public boolean diagonal1EstaIgual(){
-        char letra11 = tabela11.getLetraAtual(), letra22 = tabela22.getLetraAtual(), letra33 = tabela33.getLetraAtual();
+        char letra11 = this.tabela11.getLetraAtual(), letra22 = this.tabela22.getLetraAtual(), letra33 = this.tabela33.getLetraAtual();
         return letra11 == letra22 && letra11 == letra33;
     }
     public boolean diagonal2EstaIgual(){
-        char letra13 = tabela13.getLetraAtual(), letra22 = tabela22.getLetraAtual(), letra31 = tabela31.getLetraAtual();
+        char letra13 = this.tabela13.getLetraAtual(), letra22 = this.tabela22.getLetraAtual(), letra31 = this.tabela31.getLetraAtual();
         return letra13 == letra22 && letra13 == letra31;
     }
 

@@ -2,6 +2,7 @@ package com.example.jogodavelha;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 
 public class SquareMatrixView extends androidx.appcompat.widget.AppCompatImageView {
 
@@ -19,10 +20,7 @@ public class SquareMatrixView extends androidx.appcompat.widget.AppCompatImageVi
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
-        int width = getMeasuredWidth();
-        setMeasuredDimension(width, width);
+        super.onMeasure(widthMeasureSpec, widthMeasureSpec);
     }
 
 }

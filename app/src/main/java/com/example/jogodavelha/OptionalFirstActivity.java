@@ -16,7 +16,7 @@ public class OptionalFirstActivity extends AppCompatActivity {
     }
 
     public void openScreenOption1(View view){
-        Intent intent = new Intent(getApplicationContext(), GameActivity.class);
+        Intent intent = new Intent(getApplicationContext(), InputNameActivity.class);
         startActivity(intent);
     }
 

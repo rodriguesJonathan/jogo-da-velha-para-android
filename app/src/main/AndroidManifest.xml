@@ -10,10 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JogoDaVelha">
         <activity
-            android:name=".inputNameActivity"
-            android:exported="true" />
+            android:name=".InputNameActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
-            android:name=".GameActivity"
+            android:name=".Option1"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity

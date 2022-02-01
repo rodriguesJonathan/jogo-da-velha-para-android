@@ -6,6 +6,7 @@
     <string name="texto_jogador1">O Jogador 1 será: X</string>
     <string name="texto_jogador2">O Jogador 2 será: O</string>
     <string name="switch_inverter_simbolo">trocar simbolos</string>
-    <string name="switch_O_comeca">"O" inicia o jogo</string>
+    <string name="switch_O_comeca">\"O\" inicia o jogo</string>
     <string name="hint_name">Digite o teu nome</string>
+    <string name="botao_avancar">avançar</string>
 </resources>
