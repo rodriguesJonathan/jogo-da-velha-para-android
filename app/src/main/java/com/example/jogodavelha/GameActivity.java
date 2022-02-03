@@ -7,10 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class GameActivity extends AppCompatActivity {
     protected SquareXorOView[] imagemVermelhas;
     protected boolean alguemGanhou;
     protected int vezesPreenchidas;
+    //private DatabaseReference
 
 
     protected TextView textVezDoJogador;
