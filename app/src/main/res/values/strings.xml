@@ -11,5 +11,5 @@
     <string name="hint_name">Digite o teu nome</string>
     <string name="botao_avancar">avançar</string>
     <string name="texto_autenticacao">Escolha a opção de login</string>
-    <string name="default_web_client_id2">1019627513647-k6jkkvoc7ph9a3h60j34jkc6fgidl2s1.apps.googleusercontent.com</string>
+    <string name="web_client_id">1019627513647-5g1sq8ghpsg3u276j5tbkh4578o4680m.apps.googleusercontent.com</string>
 </resources>

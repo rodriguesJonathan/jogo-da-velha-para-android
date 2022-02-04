@@ -36,7 +36,7 @@ public class AuthActivity extends AppCompatActivity {
 
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id2))
+                .requestIdToken(getString(R.string.web_client_id))
                 .requestEmail()
                 .build();
 
@@ -50,6 +50,13 @@ public class AuthActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
+
+        if (currentUser != null){
+            mAuth.signOut();
+            Log.i("Login", "Estava, logado/Tô fora agora");
+        }else {
+            Log.i("Login", "Não estava logado");
+        }
     }
 
     public void googleButton(View view){
@@ -85,6 +92,8 @@ public class AuthActivity extends AppCompatActivity {
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
+                            Intent intent = new Intent(getApplicationContext(), ChooseRoomActivity.class);
+                            startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
