@@ -13,10 +13,11 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2575" />
         <entry key="app/src/main/res/drawable/ic_o_letter_svg.xml" value="0.2575" />
         <entry key="app/src/main/res/drawable/ic_x_letter_svg.xml" value="0.2575" />
+        <entry key="app/src/main/res/layout/activity_auth.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/layout/activity_game.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_input_name.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_optional_first.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/activity_optional_first.xml" value="0.33" />
       </map>
     </option>
   </component>
