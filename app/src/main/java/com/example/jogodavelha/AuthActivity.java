@@ -27,6 +27,8 @@ public class AuthActivity extends AppCompatActivity {
     private static final String TAG = "GoogleActivity1";
     private static final int RC_SIGN_IN = 9001;
 
+    private FirebaseUser user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +38,7 @@ public class AuthActivity extends AppCompatActivity {
 
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.web_client_id))
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
 
@@ -50,13 +52,6 @@ public class AuthActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
-
-        if (currentUser != null){
-            mAuth.signOut();
-            Log.i("Login", "Estava, logado/Tô fora agora");
-        }else {
-            Log.i("Login", "Não estava logado");
-        }
     }
 
     public void googleButton(View view){
@@ -81,6 +76,7 @@ public class AuthActivity extends AppCompatActivity {
         }
     }
 
+
     private void firebaseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential)
@@ -92,8 +88,10 @@ public class AuthActivity extends AppCompatActivity {
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
-                            Intent intent = new Intent(getApplicationContext(), ChooseRoomActivity.class);
+                            Intent intent = new Intent(AuthActivity.this, ChooseRoomActivity.class);
+                            intent.putExtra("user", user);
                             startActivity(intent);
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -108,6 +106,6 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     private void updateUI(FirebaseUser user) {
-
+        this.user = user;
     }
 }

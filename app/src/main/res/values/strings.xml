@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Jogo da Velha</string>
     <string name="nome_botao1">reiniciar</string>
@@ -11,5 +12,4 @@
     <string name="hint_name">Digite o teu nome</string>
     <string name="botao_avancar">avançar</string>
     <string name="texto_autenticacao">Escolha a opção de login</string>
-    <string name="web_client_id">906372624500-viloc8qnh61gvfl8bbluii1utv5ajb8l.apps.googleusercontent.com</string>
 </resources>

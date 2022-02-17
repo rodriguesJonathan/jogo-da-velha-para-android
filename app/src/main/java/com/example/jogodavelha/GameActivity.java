@@ -1,20 +1,15 @@
 package com.example.jogodavelha;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 public class GameActivity extends AppCompatActivity {
     protected SquareXorOView[] imagemVermelhas;
     protected boolean alguemGanhou;
     protected int vezesPreenchidas;
-    //private DatabaseReference
 
 
     protected TextView textVezDoJogador;
@@ -37,13 +32,10 @@ public class GameActivity extends AppCompatActivity {
         camposTabela = new SquareXorOView[]{tabela11, tabela12, tabela13, tabela21,
                 tabela22, tabela23, tabela31, tabela32, tabela33};
         textVezDoJogador = findViewById(R.id.textVezDoJogador);
-
-        SquareMatrixView tabuleiro = findViewById(R.id.squareImageView);
     }
 
 
     public void inserirXO(View view){
-
 
     }
 

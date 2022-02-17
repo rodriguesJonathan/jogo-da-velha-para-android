@@ -14,7 +14,6 @@ import android.widget.Toast;
 public class InputNameActivity extends AppCompatActivity {
     private EditText editNomeJogador1, editNomeJogador2;
     private TextView textoJogador1, textoJogador2;
-    public static final String ARQUIVO_PREFERENCIA = "arquivo preferencia";
     Switch switchTrocaSimbolo;
     Switch switchSimboloInicio;
     char letraGlobalAtual;
