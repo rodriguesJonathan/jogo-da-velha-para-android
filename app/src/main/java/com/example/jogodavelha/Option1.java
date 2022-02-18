@@ -9,7 +9,7 @@ import androidx.appcompat.app.AlertDialog;
 public class Option1 extends GameActivity{
     private static char letraGlobalAtual;
     private Bundle extra;
-    private Jogador jogador1, jogador2;
+    private Player player1, player2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +23,13 @@ public class Option1 extends GameActivity{
         extra = getIntent().getExtras();
         vezesPreenchidas = 0;
         this.letraGlobalAtual = extra.getChar("simboloInicial",'E');//'E' representa um erro
-        jogador1 = (Jogador) extra.getSerializable("jogador1");
-        jogador2 = (Jogador) extra.getSerializable("jogador2");
-        if (jogador1.getSimboloUsado() == letraGlobalAtual){
-            this.textVezDoJogador.setText("É a vez de "+jogador1.getNome()+".");
+        player1 = (Player) extra.getSerializable("player1");
+        player2 = (Player) extra.getSerializable("player2");
+        if (player1.getSimboloUsado() == letraGlobalAtual){
+            this.textVezDoJogador.setText("É a vez de "+ player1.getNome()+".");
         }
         else{
-            this.textVezDoJogador.setText("É a vez de "+jogador2.getNome()+".");
+            this.textVezDoJogador.setText("É a vez de "+ player2.getNome()+".");
         }
 
     }
@@ -48,7 +48,7 @@ public class Option1 extends GameActivity{
             image.setLetraAtual(this.letraGlobalAtual);
             this.vezesPreenchidas += 1;
             this.letraGlobalAtual = this.letraGlobalAtual == 'x' ? 'o' : 'x';
-            textVezDoJogador.setText("É a vez de "+  (this.letraGlobalAtual == jogador1.getSimboloUsado() ? jogador1.getNome() :  jogador2.getNome())+".");
+            textVezDoJogador.setText("É a vez de "+  (this.letraGlobalAtual == player1.getSimboloUsado() ? player1.getNome() :  player2.getNome())+".");
             verificarVencedor(image);//Sempre está na última linha do if
         }
     }
@@ -58,11 +58,11 @@ public class Option1 extends GameActivity{
     public void reiniciarJogo (View view){
         alguemGanhou = false;
         this.letraGlobalAtual = extra.getChar("simboloInicial");
-        if (jogador1.getSimboloUsado() == letraGlobalAtual){
-            textVezDoJogador.setText("É a vez de "+jogador1.getNome()+".");
+        if (player1.getSimboloUsado() == letraGlobalAtual){
+            textVezDoJogador.setText("É a vez de "+ player1.getNome()+".");
         }
         else{
-            textVezDoJogador.setText("É a vez de "+jogador2.getNome()+".");
+            textVezDoJogador.setText("É a vez de "+ player2.getNome()+".");
         }
 
         if (this.vezesPreenchidas > 0 && imagemVermelhas[0] != null){
@@ -77,7 +77,7 @@ public class Option1 extends GameActivity{
     protected void informarVencedor(){
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Temos um vencedor(a)");
-        dialog.setMessage("Meus parabéns, "+(jogador1.getSimboloUsado()!=letraGlobalAtual ? jogador1.getNome() : jogador2.getNome())+", pela tua vitória!!");
+        dialog.setMessage("Meus parabéns, "+(player1.getSimboloUsado()!=letraGlobalAtual ? player1.getNome() : player2.getNome())+", pela tua vitória!!");
         dialog.setPositiveButton("Avançar", null);
         dialog.create();
         dialog.show();

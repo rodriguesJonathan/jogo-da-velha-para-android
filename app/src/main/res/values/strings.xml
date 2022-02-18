@@ -12,4 +12,5 @@
     <string name="hint_name">Digite o teu nome</string>
     <string name="botao_avancar">avançar</string>
     <string name="texto_autenticacao">Escolha a opção de login</string>
+    <string name="default_web_client_id_copy">@string/default_web_client_id</string>
 </resources>

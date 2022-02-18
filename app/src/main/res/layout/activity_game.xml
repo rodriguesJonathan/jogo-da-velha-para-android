@@ -154,6 +154,7 @@
         android:layout_height="wrap_content"
         android:onClick="reiniciarJogo"
         android:text="@string/nome_botao1"
+        android:textSize="@dimen/button_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -165,7 +166,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="TextView"
-        android:textSize="28sp"
+        android:textSize="@dimen/text_size"
         app:layout_constraintBottom_toTopOf="@+id/squareImageView"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -176,7 +177,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.365" />
+        app:layout_constraintGuide_percent="0.36" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline7"

@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -54,24 +53,24 @@ public class InputNameActivity extends AppCompatActivity {
         }else{
             Intent intent = new Intent(getApplicationContext(),Option1.class);
 
-            Jogador jogador1 = new Jogador(editNomeJogador1.getText().toString());
-            Jogador jogador2 = new Jogador(editNomeJogador2.getText().toString());
+            Player player1 = new Player(editNomeJogador1.getText().toString());
+            Player player2 = new Player(editNomeJogador2.getText().toString());
 
 
             if (switchTrocaSimbolo.isChecked()){
-                jogador1.setSimboloUsado('o');
-                jogador2.setSimboloUsado('x');
+                player1.setSimboloUsado('o');
+                player2.setSimboloUsado('x');
             }else{
-                jogador1.setSimboloUsado('x');
-                jogador2.setSimboloUsado('o');
+                player1.setSimboloUsado('x');
+                player2.setSimboloUsado('o');
             }
             if (switchSimboloInicio.isChecked()){
                 intent.putExtra("simboloInicial", 'o');
             }else{
                 intent.putExtra("simboloInicial", 'x');
             }
-            intent.putExtra("jogador1", jogador1);
-            intent.putExtra("jogador2", jogador2);
+            intent.putExtra("player1", player1);
+            intent.putExtra("player2", player2);
 
 
             startActivity(intent);
@@ -81,11 +80,11 @@ public class InputNameActivity extends AppCompatActivity {
 
     public void trocarSimbolo(View view){
         if (switchTrocaSimbolo.isChecked()){
-            textoJogador2.setText("O Jogador 2 será: X");
-            textoJogador1.setText("O Jogador 1 será: O");
+            textoJogador2.setText("O Player 2 será: X");
+            textoJogador1.setText("O Player 1 será: O");
         }else{
-            textoJogador1.setText("O Jogador 1 será: X");
-            textoJogador2.setText("O Jogador 2 será: O");
+            textoJogador1.setText("O Player 1 será: X");
+            textoJogador2.setText("O Player 2 será: O");
         }
     }
 }

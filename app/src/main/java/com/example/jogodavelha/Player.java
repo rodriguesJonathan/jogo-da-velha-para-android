@@ -2,11 +2,11 @@ package com.example.jogodavelha;
 
 import java.io.Serializable;
 
-public class Jogador implements Serializable {
+public class Player implements Serializable {
     private String nome;
     private char simboloUsado;
 
-    Jogador(String nome){
+    Player(String nome){
         this.nome = nome;
     }
 
