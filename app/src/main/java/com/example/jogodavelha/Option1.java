@@ -7,7 +7,7 @@ import android.view.View;
 import androidx.appcompat.app.AlertDialog;
 
 public class Option1 extends GameActivity{
-    private static char letraGlobalAtual;
+    private static String letraGlobalAtual;
     private Bundle extra;
     private Player player1, player2;
 
@@ -22,14 +22,14 @@ public class Option1 extends GameActivity{
         zerarVezesPreenchidas();
         extra = getIntent().getExtras();
         vezesPreenchidas = 0;
-        this.letraGlobalAtual = extra.getChar("simboloInicial",'E');//'E' representa um erro
+        this.letraGlobalAtual = extra.getString("simboloInicial","E");//'E' representa um erro
         player1 = (Player) extra.getSerializable("player1");
         player2 = (Player) extra.getSerializable("player2");
-        if (player1.getSimboloUsado() == letraGlobalAtual){
-            this.textVezDoJogador.setText("É a vez de "+ player1.getNome()+".");
+        if (player1.getUsedSymbol().equals(letraGlobalAtual)){
+            this.textVezDoJogador.setText("É a vez de "+ player1.getName()+".");
         }
         else{
-            this.textVezDoJogador.setText("É a vez de "+ player2.getNome()+".");
+            this.textVezDoJogador.setText("É a vez de "+ player2.getName()+".");
         }
 
     }
@@ -39,16 +39,16 @@ public class Option1 extends GameActivity{
     public void inserirXO(View view){
         SquareXorOView image = findViewById(view.getId());
 
-        if (image.getLetraAtual() == '_' && !alguemGanhou){
-            if (this.letraGlobalAtual == 'x'){
+        if (image.getLetraAtual().equals("_") && !alguemGanhou){
+            if (this.letraGlobalAtual.equals("x")){
                 image.setImageResource(R.drawable.ic_x_letter_svg);
-            }else if(this.letraGlobalAtual == 'o'){
+            }else if(this.letraGlobalAtual.equals("o")){
                 image.setImageResource(R.drawable.ic_o_letter_svg);
             }
             image.setLetraAtual(this.letraGlobalAtual);
             this.vezesPreenchidas += 1;
-            this.letraGlobalAtual = this.letraGlobalAtual == 'x' ? 'o' : 'x';
-            textVezDoJogador.setText("É a vez de "+  (this.letraGlobalAtual == player1.getSimboloUsado() ? player1.getNome() :  player2.getNome())+".");
+            this.letraGlobalAtual = this.letraGlobalAtual.equals("x") ? "o" : "x";
+            textVezDoJogador.setText("É a vez de "+  (this.letraGlobalAtual.equals(player1.getUsedSymbol()) ? player1.getName() :  player2.getName())+".");
             verificarVencedor(image);//Sempre está na última linha do if
         }
     }
@@ -57,12 +57,12 @@ public class Option1 extends GameActivity{
     @Override
     public void reiniciarJogo (View view){
         alguemGanhou = false;
-        this.letraGlobalAtual = extra.getChar("simboloInicial");
-        if (player1.getSimboloUsado() == letraGlobalAtual){
-            textVezDoJogador.setText("É a vez de "+ player1.getNome()+".");
+        this.letraGlobalAtual = extra.getString("simboloInicial");
+        if (player1.getUsedSymbol().equals(letraGlobalAtual)){
+            textVezDoJogador.setText("É a vez de "+ player1.getName()+".");
         }
         else{
-            textVezDoJogador.setText("É a vez de "+ player2.getNome()+".");
+            textVezDoJogador.setText("É a vez de "+ player2.getName()+".");
         }
 
         if (this.vezesPreenchidas > 0 && imagemVermelhas[0] != null){
@@ -77,7 +77,7 @@ public class Option1 extends GameActivity{
     protected void informarVencedor(){
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Temos um vencedor(a)");
-        dialog.setMessage("Meus parabéns, "+(player1.getSimboloUsado()!=letraGlobalAtual ? player1.getNome() : player2.getNome())+", pela tua vitória!!");
+        dialog.setMessage("Meus parabéns, "+( ! player1.getUsedSymbol().equals(letraGlobalAtual) ? player1.getName() : player2.getName())+", pela tua vitória!!");
         dialog.setPositiveButton("Avançar", null);
         dialog.create();
         dialog.show();
@@ -100,7 +100,7 @@ public class Option1 extends GameActivity{
 
         for (SquareXorOView campo : camposTabela) {
             campo.setImageResource(R.drawable.vazio);
-            campo.setLetraAtual('_');
+            campo.setLetraAtual("_");
         }
         vezesPreenchidas = 0;
     }

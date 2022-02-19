@@ -34,6 +34,8 @@ public class CreateRoomActivity extends AppCompatActivity {
     private Random random = new Random();
     private ArrayList<String> salas = new ArrayList<>();
     private String salaCriada;
+    private String namePlayer2Firebase;
+    private ValueEventListener valueEventListenerAddRoom;
 
     private FirebaseUser user;
     private FirebaseAuth mAuth;
@@ -43,8 +45,8 @@ public class CreateRoomActivity extends AppCompatActivity {
     private Switch switchSetting;
     private RadioButton radioXplayer;
     private RadioButton radioOplayer;
-    private RadioButton radioXfirst;
-    private RadioButton radioOfirst;
+    private RadioButton radioMe;
+    private RadioButton radioOpponent;
 
     private RadioGroup radioGroup1;
     private RadioGroup radioGroup2;
@@ -94,8 +96,8 @@ public class CreateRoomActivity extends AppCompatActivity {
         radioXplayer = findViewById(R.id.radioXplayer);
         radioOplayer = findViewById(R.id.radioOplayer);
 
-        radioXfirst = findViewById(R.id.radioXfirst);
-        radioOfirst = findViewById(R.id.radioOfirst);
+        radioMe = findViewById(R.id.radioMe);
+        radioOpponent = findViewById(R.id.radioOpponent);
 
         radioGroup1 = findViewById(R.id.RadioGroup1);
         radioGroup2 = findViewById(R.id.RadioGroup2);
@@ -138,25 +140,74 @@ public class CreateRoomActivity extends AppCompatActivity {
 
             salaCriada = numText;
 
-            myRef.child("Rooms").child(numText).child("Jogador1").setValue("Jogador teste");
-            myRef.child("Rooms").child(numText).child("Jogador2").setValue("-");
-            myRef.child("Rooms").child(numText).child("Tabuleiro").child("tab11").setValue("-");
-            myRef.child("Rooms").child(numText).child("Tabuleiro").child("tab12").setValue("-");
-            myRef.child("Rooms").child(numText).child("Tabuleiro").child("tab13").setValue("-");
-            myRef.child("Rooms").child(numText).child("Tabuleiro").child("tab21").setValue("-");
-            myRef.child("Rooms").child(numText).child("Tabuleiro").child("tab22").setValue("-");
-            myRef.child("Rooms").child(numText).child("Tabuleiro").child("tab23").setValue("-");
-            myRef.child("Rooms").child(numText).child("Tabuleiro").child("tab31").setValue("-");
-            myRef.child("Rooms").child(numText).child("Tabuleiro").child("tab32").setValue("-");
-            myRef.child("Rooms").child(numText).child("Tabuleiro").child("tab33").setValue("-");
+            String[] nomeCompletoJogador =  user.getDisplayName().split(" ");
+            String nomeJogador = nomeCompletoJogador[0]+" "+nomeCompletoJogador[nomeCompletoJogador.length - 1];
+            Player player1 = new Player(nomeJogador);
+            Player player2 = new Player();
+            Grid grid = new Grid();
 
 
-            myRef.child("Rooms").child(numText).child("Jogador2").addValueEventListener(new ValueEventListener() {
+            if (switchSetting.isChecked()){
+                Random random = new Random();
+                int numRandomSymbol = random.nextInt(2);
+                if(numRandomSymbol == 0){
+                    player1.setUsedSymbol("X");
+                    player2.setUsedSymbol("O");
+                }else if(numRandomSymbol == 1){
+                    player1.setUsedSymbol("O");
+                    player2.setUsedSymbol("X");
+                }
+                int numRandomFirstPlayer = random.nextInt(2);
+                if (numRandomFirstPlayer == 0){
+                    grid.setFirstPlayer("player1");
+                    grid.setCurrentPlayer("player1");
+                }else if(numRandomFirstPlayer == 1){
+                    grid.setFirstPlayer("player2");
+                    grid.setCurrentPlayer("player2");
+                }
+
+
+            }else{
+                if(radioXplayer.isChecked()){
+                    player1.setUsedSymbol("X");
+                    player2.setUsedSymbol("O");
+                }else if(radioOplayer.isChecked()){
+                    player1.setUsedSymbol("O");
+                    player2.setUsedSymbol("X");
+                }
+
+                if (radioMe.isChecked()){
+                    grid.setFirstPlayer("player1");
+                    grid.setCurrentPlayer("player1");
+                }else if(radioOpponent.isChecked()){
+                    grid.setFirstPlayer("player2");
+                    grid.setCurrentPlayer("player2");
+                }
+
+
+            }
+
+
+
+
+            myRef.child("Rooms").child(numText).child("player1").setValue(player1);
+
+
+            myRef.child("Rooms").child(numText).child("player2").setValue(player2);
+
+
+
+            myRef.child("Rooms").child(numText).child("grid").setValue(grid);
+
+
+            valueEventListenerAddRoom = new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     Log.i("info jog2",snapshot.getValue().toString());
-                    if (!snapshot.getValue().toString().equals("-")){
+                    namePlayer2Firebase = snapshot.getValue().toString();
+                    if (!namePlayer2Firebase.equals("-")){
                         Toast.makeText(getApplicationContext(), "Ir para proxima activity", Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                 }
 
@@ -164,7 +215,9 @@ public class CreateRoomActivity extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            };
+
+            myRef.child("Rooms").child(numText).child("player2").child("name").addValueEventListener(valueEventListenerAddRoom);
 
             TextView roomCode = findViewById(R.id.textViewRoomCode);
             ImageButton copyCode = findViewById(R.id.copyButton);
@@ -182,8 +235,8 @@ public class CreateRoomActivity extends AppCompatActivity {
             switchSetting.setEnabled(false);
             radioXplayer.setEnabled(false);
             radioOplayer.setEnabled(false);
-            radioXfirst.setEnabled(false);
-            radioOfirst.setEnabled(false);
+            radioMe.setEnabled(false);
+            radioOpponent.setEnabled(false);
 
 
         }else{
@@ -201,4 +254,21 @@ public class CreateRoomActivity extends AppCompatActivity {
         clipboard.setPrimaryClip(clip);
         Toast.makeText(getApplicationContext(), "Código da sala copia da área de transferência", Toast.LENGTH_LONG).show();
     }
+
+
+    @Override
+    public void onDestroy() {
+        if (salaCriada != null){
+
+            if(namePlayer2Firebase.equals("-")){
+                myRef.child("Rooms").child(salaCriada).child("player2").child("name").removeEventListener(valueEventListenerAddRoom);
+                myRef.child("Rooms").child(salaCriada).removeValue();
+            }else{
+                myRef.child("Rooms").child(salaCriada).child("player1").child("name").setValue("-");
+            }
+
+        }
+        super.onDestroy();
+    }
+
 }

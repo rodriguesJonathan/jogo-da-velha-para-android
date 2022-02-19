@@ -58,16 +58,16 @@ public class InputNameActivity extends AppCompatActivity {
 
 
             if (switchTrocaSimbolo.isChecked()){
-                player1.setSimboloUsado('o');
-                player2.setSimboloUsado('x');
+                player1.setUsedSymbol("o");
+                player2.setUsedSymbol("x");
             }else{
-                player1.setSimboloUsado('x');
-                player2.setSimboloUsado('o');
+                player1.setUsedSymbol("x");
+                player2.setUsedSymbol("o");
             }
             if (switchSimboloInicio.isChecked()){
-                intent.putExtra("simboloInicial", 'o');
+                intent.putExtra("simboloInicial", "o");
             }else{
-                intent.putExtra("simboloInicial", 'x');
+                intent.putExtra("simboloInicial", "x");
             }
             intent.putExtra("player1", player1);
             intent.putExtra("player2", player2);

@@ -188,36 +188,36 @@ public class GameActivity extends AppCompatActivity {
 
 
     public boolean coluna1EstaIgual(){
-        char letra11 = this.tabela11.getLetraAtual(), letra21 = this.tabela21.getLetraAtual(), letra31 = this.tabela31.getLetraAtual();
-        return letra11 == letra21 && letra11 == letra31;
+        String letra11 = this.tabela11.getLetraAtual(), letra21 = this.tabela21.getLetraAtual(), letra31 = this.tabela31.getLetraAtual();
+        return letra11.equals(letra21) && letra11.equals(letra31);
     }
     public boolean coluna2EstaIgual(){
-        char letra12 = this.tabela12.getLetraAtual(), letra22 = this.tabela22.getLetraAtual(), letra32 = this.tabela32.getLetraAtual();
-        return letra12 == letra22 && letra12 == letra32;
+        String letra12 = this.tabela12.getLetraAtual(), letra22 = this.tabela22.getLetraAtual(), letra32 = this.tabela32.getLetraAtual();
+        return letra12.equals(letra22) && letra12.equals(letra32);
     }
     public boolean coluna3EstaIgual(){
-        char letra13 = this.tabela13.getLetraAtual(), letra23 = this.tabela23.getLetraAtual(), letra33 = this.tabela33.getLetraAtual();
-        return letra13 == letra23 && letra13 == letra33;
+        String letra13 = this.tabela13.getLetraAtual(), letra23 = this.tabela23.getLetraAtual(), letra33 = this.tabela33.getLetraAtual();
+        return letra13.equals(letra23) && letra13.equals(letra33);
     }
     public boolean linha1EstaIgual(){
-        char letra11 = this.tabela11.getLetraAtual(), letra12 = this.tabela12.getLetraAtual(), letra13 = this.tabela13.getLetraAtual();
-        return letra11 == letra12 && letra11 == letra13;
+        String letra11 = this.tabela11.getLetraAtual(), letra12 = this.tabela12.getLetraAtual(), letra13 = this.tabela13.getLetraAtual();
+        return letra11.equals(letra12) && letra11.equals(letra13);
     }
     public boolean linha2EstaIgual(){
-        char letra21 = this.tabela21.getLetraAtual(), letra22 = this.tabela22.getLetraAtual(), letra23 = this.tabela23.getLetraAtual();
-        return letra21 == letra22 && letra21 == letra23;
+        String letra21 = this.tabela21.getLetraAtual(), letra22 = this.tabela22.getLetraAtual(), letra23 = this.tabela23.getLetraAtual();
+        return letra21.equals(letra22) && letra21.equals(letra23);
     }
     public boolean linha3EstaIgual(){
-        char letra31 = this.tabela31.getLetraAtual(), letra32 = this.tabela32.getLetraAtual(), letra33 = this.tabela33.getLetraAtual();
-        return letra31 == letra32 && letra31 == letra33;
+        String letra31 = this.tabela31.getLetraAtual(), letra32 = this.tabela32.getLetraAtual(), letra33 = this.tabela33.getLetraAtual();
+        return letra31.equals(letra32) && letra31.equals(letra33);
     }
     public boolean diagonal1EstaIgual(){
-        char letra11 = this.tabela11.getLetraAtual(), letra22 = this.tabela22.getLetraAtual(), letra33 = this.tabela33.getLetraAtual();
-        return letra11 == letra22 && letra11 == letra33;
+        String letra11 = this.tabela11.getLetraAtual(), letra22 = this.tabela22.getLetraAtual(), letra33 = this.tabela33.getLetraAtual();
+        return letra11.equals(letra22) && letra11.equals(letra33);
     }
     public boolean diagonal2EstaIgual(){
-        char letra13 = this.tabela13.getLetraAtual(), letra22 = this.tabela22.getLetraAtual(), letra31 = this.tabela31.getLetraAtual();
-        return letra13 == letra22 && letra13 == letra31;
+        String letra13 = this.tabela13.getLetraAtual(), letra22 = this.tabela22.getLetraAtual(), letra31 = this.tabela31.getLetraAtual();
+        return letra13.equals(letra22) && letra13.equals(letra31);
     }
 
 

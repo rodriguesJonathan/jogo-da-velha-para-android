@@ -7,30 +7,15 @@
     tools:context=".CreateRoomActivity">
 
     <TextView
-        android:id="@+id/textViewRoomCode"
+        android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Codigo sala"
-        android:textSize="@dimen/text_size"
-        android:visibility="invisible"
         android:layout_marginTop="32dp"
+        android:text="Configurações da sala"
+        android:textSize="@dimen/text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button7" />
-
-    <ImageButton
-        android:id="@+id/copyButton"
-        android:layout_width="32dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="-5dp"
-        android:scaleType="centerCrop"
-        android:visibility="gone"
-        android:onClick="copyCode"
-        android:backgroundTint="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewRoomCode"
-        app:layout_constraintStart_toEndOf="@+id/textViewRoomCode"
-        app:srcCompat="@drawable/ic_baseline_content_copy_50" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Switch
         android:id="@+id/switchSettings"
@@ -83,43 +68,6 @@
             android:textSize="@dimen/radio_text_size"/>
     </RadioGroup>
 
-    <Button
-        android:id="@+id/button7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Criar e entrar na sala"
-        android:textSize="@dimen/button_text_size"
-        android:onClick="addRoom"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.61" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Aguardando o oponente"
-        android:textSize="@dimen/text_size"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.632"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRoomCode" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Configurações da sala"
-        android:textSize="@dimen/text_size"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <RadioGroup
         android:id="@+id/RadioGroup2"
         android:layout_width="wrap_content"
@@ -135,24 +83,77 @@
             android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Qual é o simbolo inicial"
+            android:text="Quem começa o jogo: "
             android:textSize="@dimen/radio_text_size" />
 
         <RadioButton
-            android:id="@+id/radioXfirst"
+            android:id="@+id/radioMe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="X"
+            android:text="Eu"
             android:textSize="@dimen/radio_text_size" />
 
         <RadioButton
-            android:id="@+id/radioOfirst"
+            android:id="@+id/radioOpponent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="O"
+            android:text="Oponente"
             android:textSize="@dimen/radio_text_size" />
     </RadioGroup>
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Criar e entrar na sala"
+        android:textSize="@dimen/button_text_size"
+        android:onClick="addRoom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.61" />
+
+
+    <TextView
+        android:id="@+id/textViewRoomCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Codigo sala"
+        android:textSize="@dimen/text_size"
+        android:visibility="invisible"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button7" />
+
+    <ImageButton
+        android:id="@+id/copyButton"
+        android:layout_width="32dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="20dp"
+        android:backgroundTint="@color/white"
+        android:onClick="copyCode"
+        android:scaleType="centerCrop"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewRoomCode"
+        app:layout_constraintStart_toEndOf="@+id/textViewRoomCode"
+        app:layout_constraintTop_toTopOf="@+id/textViewRoomCode"
+        app:srcCompat="@drawable/ic_baseline_content_copy_50" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Aguardando o oponente"
+        android:textSize="@dimen/text_size"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.632"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRoomCode" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -160,9 +161,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
-        android:layout_marginBottom="-8dp"
-        android:visibility="gone"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/textView8"
-        app:layout_constraintEnd_toStartOf="@+id/textView8" />
+        app:layout_constraintEnd_toStartOf="@+id/textView8"
+        app:layout_constraintTop_toTopOf="@+id/textView8" />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

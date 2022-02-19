@@ -3,26 +3,27 @@ package com.example.jogodavelha;
 import java.io.Serializable;
 
 public class Player implements Serializable {
-    private String nome;
-    private char simboloUsado;
+    private String name = "-";
+    private String usedSymbol = "-";
 
-    Player(String nome){
-        this.nome = nome;
+    Player(){    }
+    Player(String name){
+        this.name = name;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public char getSimboloUsado() {
-        return simboloUsado;
+    public String getUsedSymbol() {
+        return usedSymbol;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setSimboloUsado(char simboloUsado) {
-        this.simboloUsado = simboloUsado;
+    public void setUsedSymbol(String usedSymbol) {
+        this.usedSymbol = usedSymbol;
     }
 }

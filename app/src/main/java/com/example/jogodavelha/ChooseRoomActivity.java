@@ -99,15 +99,15 @@ public class ChooseRoomActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     Log.i("Info Data", nomeJogador);
-                    Player player = new Player(nomeJogador);
+                    Player newPlayer = new Player("nomeJogador");
 
-                    String namePlayer1inFirebase = snapshot.child("Jogador1").getValue().toString();
-                    String namePlayer2inFirebase = snapshot.child("Jogador2").getValue().toString();
+                    Player player1inFirebase = snapshot.child("player1").getValue(Player.class);
+                    Player player2inFirebase = snapshot.child("player2").getValue(Player.class);
 
-                    if(namePlayer1inFirebase.equals("-")){
-                        myRef.child("Rooms").child(editNumeroSala.getText().toString()).child("Jogador1").setValue(nomeJogador);
-                    }else if(namePlayer2inFirebase.equals("-")){
-                        myRef.child("Rooms").child(editNumeroSala.getText().toString()).child("Jogador2").setValue(nomeJogador);
+                    if(player1inFirebase.getName().equals("-")){
+                        myRef.child("Rooms").child(editNumeroSala.getText().toString()).child("player1").setValue(newPlayer);
+                    }else if(player2inFirebase.getName().equals("-")){
+                        myRef.child("Rooms").child(editNumeroSala.getText().toString()).child("player2").setValue(newPlayer);
                     }else{
                         Toast.makeText(getApplicationContext(), "A sala está cheia", Toast.LENGTH_SHORT).show();
                         return;
@@ -139,4 +139,5 @@ public class ChooseRoomActivity extends AppCompatActivity {
     private void updateUI(FirebaseUser user) {
         this.user = user;
     }
+
 }
