@@ -91,7 +91,9 @@ public class ChooseRoomActivity extends AppCompatActivity {
 
     public void entrarSala(View view){
         if (salas.contains(editNumeroSala.getText().toString())){
-            DatabaseReference salaReferencia = myRef.child("Rooms").child(editNumeroSala.getText().toString());
+
+            String digitedNumberRoom = editNumeroSala.getText().toString();
+            DatabaseReference salaReferencia = myRef.child("Rooms").child(digitedNumberRoom);
             String[] nomeCompletoJogador =  user.getDisplayName().split(" ");
             String nomeJogador = nomeCompletoJogador[0]+" "+nomeCompletoJogador[nomeCompletoJogador.length - 1];
 
@@ -104,19 +106,24 @@ public class ChooseRoomActivity extends AppCompatActivity {
                     Player player1inFirebase = snapshot.child("player1").getValue(Player.class);
                     Player player2inFirebase = snapshot.child("player2").getValue(Player.class);
 
+                    Intent intent = new Intent(getApplicationContext(), Option2.class);
+
                     if(player1inFirebase.getName().equals("-")){
-                        myRef.child("Rooms").child(editNumeroSala.getText().toString()).child("player1").setValue(newPlayer);
+                        myRef.child("Rooms").child(digitedNumberRoom).child("player1").setValue(newPlayer);
+                        intent.putExtra("nodePLayer", "player1");
                     }else if(player2inFirebase.getName().equals("-")){
-                        myRef.child("Rooms").child(editNumeroSala.getText().toString()).child("player2").setValue(newPlayer);
+                        myRef.child("Rooms").child(digitedNumberRoom).child("player2").setValue(newPlayer);
+                        intent.putExtra("nodePLayer", "player2");
                     }else{
                         Toast.makeText(getApplicationContext(), "A sala está cheia", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    /*
-                    Intent intent = new Intent(getApplicationContext(), Option2.class);
-                    intent.putExtra("player", player);
+
+                    //Sala validada
+
+                    intent.putExtra("roomNumber", digitedNumberRoom);
+
                     startActivity(intent);
-                     */
 
 
                 }

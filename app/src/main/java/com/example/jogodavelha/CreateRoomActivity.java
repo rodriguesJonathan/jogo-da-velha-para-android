@@ -259,14 +259,8 @@ public class CreateRoomActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         if (salaCriada != null){
-
-            if(namePlayer2Firebase.equals("-")){
-                myRef.child("Rooms").child(salaCriada).child("player2").child("name").removeEventListener(valueEventListenerAddRoom);
-                myRef.child("Rooms").child(salaCriada).removeValue();
-            }else{
-                myRef.child("Rooms").child(salaCriada).child("player1").child("name").setValue("-");
-            }
-
+            myRef.child("Rooms").child(salaCriada).child("player2").child("name").removeEventListener(valueEventListenerAddRoom);
+            myRef.child("Rooms").child(salaCriada).removeValue();
         }
         super.onDestroy();
     }

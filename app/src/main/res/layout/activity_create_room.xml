@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Você vai jogar com:"
+            android:text="Escolha o teu símbolo: "
             android:textSize="@dimen/radio_text_size" />
 
         <RadioButton
@@ -83,7 +83,7 @@
             android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Quem começa o jogo: "
+            android:text="Escolha o primeiro jogador: "
             android:textSize="@dimen/radio_text_size" />
 
         <RadioButton

@@ -1,7 +1,5 @@
 package com.example.jogodavelha;
 
-import java.io.Serializable;
-
 public class Grid extends Object {
 
     private String firstPlayer = "Não definido";

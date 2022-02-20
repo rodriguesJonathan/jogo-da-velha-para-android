@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JogoDaVelha">
         <activity
+            android:name=".Option2"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".CreateRoomActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
