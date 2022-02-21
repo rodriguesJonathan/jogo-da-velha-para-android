@@ -95,13 +95,13 @@ public class ChooseRoomActivity extends AppCompatActivity {
             String digitedNumberRoom = editNumeroSala.getText().toString();
             DatabaseReference salaReferencia = myRef.child("Rooms").child(digitedNumberRoom);
             String[] nomeCompletoJogador =  user.getDisplayName().split(" ");
-            String nomeJogador = nomeCompletoJogador[0]+" "+nomeCompletoJogador[nomeCompletoJogador.length - 1];
+            String playerName = nomeCompletoJogador[0]+" "+nomeCompletoJogador[nomeCompletoJogador.length - 1];
 
             salaReferencia.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Log.i("Info Data", nomeJogador);
-                    Player newPlayer = new Player("nomeJogador");
+                    Log.i("Info Data", playerName);
+                    Player newPlayer = new Player(playerName);
 
                     Player player1inFirebase = snapshot.child("player1").getValue(Player.class);
                     Player player2inFirebase = snapshot.child("player2").getValue(Player.class);
@@ -109,11 +109,15 @@ public class ChooseRoomActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), Option2.class);
 
                     if(player1inFirebase.getName().equals("-")){
-                        myRef.child("Rooms").child(digitedNumberRoom).child("player1").setValue(newPlayer);
-                        intent.putExtra("nodePLayer", "player1");
+                        salaReferencia.child("player1").setValue(newPlayer);
+                        intent.putExtra("myNodePlayer", "player1");
+                        intent.putExtra("opponentNodePlayer", "player2");
+                        intent.putExtra("roomNumber", digitedNumberRoom);
                     }else if(player2inFirebase.getName().equals("-")){
-                        myRef.child("Rooms").child(digitedNumberRoom).child("player2").setValue(newPlayer);
-                        intent.putExtra("nodePLayer", "player2");
+                        salaReferencia.child("player2").setValue(newPlayer);
+                        intent.putExtra("myNodePlayer", "player2");
+                        intent.putExtra("opponentNodePlayer", "player1");
+                        intent.putExtra("roomNumber", digitedNumberRoom);
                     }else{
                         Toast.makeText(getApplicationContext(), "A sala está cheia", Toast.LENGTH_SHORT).show();
                         return;
@@ -134,7 +138,7 @@ public class ChooseRoomActivity extends AppCompatActivity {
                 }
             });
         }else{
-            Toast.makeText(getApplicationContext(), "A sala não existe", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "A sala não encontrada", Toast.LENGTH_SHORT).show();
         }
     }
 
