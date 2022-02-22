@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class Player implements Serializable {
     private String name = "-";
     private String usedSymbol = "-";
+    private String userCode = "-";
 
     Player(){    }
     Player(String name){
@@ -25,5 +26,13 @@ public class Player implements Serializable {
 
     public void setUsedSymbol(String usedSymbol) {
         this.usedSymbol = usedSymbol;
+    }
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
     }
 }

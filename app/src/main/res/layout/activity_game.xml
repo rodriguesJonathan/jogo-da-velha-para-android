@@ -33,6 +33,7 @@
 
     <com.example.jogodavelha.SquareXorOView
         android:id="@+id/tabela11"
+        android:transitionName="11"
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:padding="7dp"
@@ -46,21 +47,10 @@
         app:layout_constraintVertical_bias="0.050000012"
         app:layout_constraintVertical_chainStyle="spread" />
 
-    <com.example.jogodavelha.SquareXorOView
-        android:id="@+id/tabela13"
-        android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:padding="7dp"
-        android:background="@drawable/vazio"
-        android:onClick="inserirXO"
-        app:layout_constraintBottom_toBottomOf="@+id/squareImageView"
-        app:layout_constraintEnd_toEndOf="@+id/squareImageView"
-        app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toTopOf="@+id/squareImageView"
-        app:layout_constraintVertical_bias="0.050000012" />
 
     <com.example.jogodavelha.SquareXorOView
         android:id="@+id/tabela12"
+        android:transitionName="12"
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:padding="7dp"
@@ -73,7 +63,22 @@
         app:layout_constraintVertical_bias="0.050000012" />
 
     <com.example.jogodavelha.SquareXorOView
+        android:id="@+id/tabela13"
+        android:transitionName="13"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:padding="7dp"
+        android:background="@drawable/vazio"
+        android:onClick="inserirXO"
+        app:layout_constraintBottom_toBottomOf="@+id/squareImageView"
+        app:layout_constraintEnd_toEndOf="@+id/squareImageView"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toTopOf="@+id/squareImageView"
+        app:layout_constraintVertical_bias="0.050000012" />
+
+    <com.example.jogodavelha.SquareXorOView
         android:id="@+id/tabela21"
+        android:transitionName="21"
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:padding="7dp"
@@ -86,6 +91,7 @@
 
     <com.example.jogodavelha.SquareXorOView
         android:id="@+id/tabela22"
+        android:transitionName="22"
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:padding="7dp"
@@ -98,6 +104,7 @@
 
     <com.example.jogodavelha.SquareXorOView
         android:id="@+id/tabela23"
+        android:transitionName="23"
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:padding="7dp"
@@ -110,6 +117,7 @@
 
     <com.example.jogodavelha.SquareXorOView
         android:id="@+id/tabela31"
+        android:transitionName="31"
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:padding="7dp"
@@ -124,6 +132,7 @@
 
     <com.example.jogodavelha.SquareXorOView
         android:id="@+id/tabela32"
+        android:transitionName="32"
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:padding="7dp"
@@ -137,6 +146,7 @@
 
     <com.example.jogodavelha.SquareXorOView
         android:id="@+id/tabela33"
+        android:transitionName="33"
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:padding="7dp"

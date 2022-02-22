@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,7 +34,7 @@ import java.util.Random;
 public class CreateRoomActivity extends AppCompatActivity {
     private Random random = new Random();
     private ArrayList<String> salas = new ArrayList<>();
-    private String salaCriada;
+    private String createdRoom;
     private String namePlayer2Firebase;
     private ValueEventListener valueEventListenerAddRoom;
 
@@ -64,7 +65,6 @@ public class CreateRoomActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 salas.add(snapshot.getKey());
-                Log.i("Info onChildAdded", snapshot.getKey());
 
             }
 
@@ -127,7 +127,7 @@ public class CreateRoomActivity extends AppCompatActivity {
     }
 
     public void addRoom(View view){
-        if(salaCriada == null) {
+        if(createdRoom == null) {
 
             String numText;
             do {
@@ -138,12 +138,14 @@ public class CreateRoomActivity extends AppCompatActivity {
                 }
             } while (salas.contains(numText));
 
-            salaCriada = numText;
+            createdRoom = numText;
 
             String[] nomeCompletoJogador =  user.getDisplayName().split(" ");
             String nomeJogador = nomeCompletoJogador[0]+" "+nomeCompletoJogador[nomeCompletoJogador.length - 1];
             Player player1 = new Player(nomeJogador);
             Player player2 = new Player();
+            player1.setUserCode("1");
+            player2.setUserCode("2");
             Grid grid = new Grid();
 
 
@@ -159,11 +161,11 @@ public class CreateRoomActivity extends AppCompatActivity {
                 }
                 int numRandomFirstPlayer = random.nextInt(2);
                 if (numRandomFirstPlayer == 0){
-                    grid.setFirstPlayer("player1");
-                    grid.setCurrentPlayer("player1");
+                    grid.setFirstPlayerCode("1");
+                    grid.setCurrentPlayerCode("1");
                 }else if(numRandomFirstPlayer == 1){
-                    grid.setFirstPlayer("player2");
-                    grid.setCurrentPlayer("player2");
+                    grid.setFirstPlayerCode("2");
+                    grid.setCurrentPlayerCode("2");
                 }
 
 
@@ -177,27 +179,27 @@ public class CreateRoomActivity extends AppCompatActivity {
                 }
 
                 if (radioMe.isChecked()){
-                    grid.setFirstPlayer("player1");
-                    grid.setCurrentPlayer("player1");
+                    grid.setFirstPlayerCode("1");
+                    grid.setCurrentPlayerCode("1");
                 }else if(radioOpponent.isChecked()){
-                    grid.setFirstPlayer("player2");
-                    grid.setCurrentPlayer("player2");
+                    grid.setFirstPlayerCode("2");
+                    grid.setCurrentPlayerCode("2");
                 }
 
 
             }
 
+            DatabaseReference roomReference = myRef.child("Rooms").child(createdRoom);
+
+            roomReference.child("grid").setValue(grid);
+            roomReference.child("player1").setValue(player1);
+            roomReference.child("player2").setValue(player2);
+            roomReference.child("currentImageId").setValue("-");
 
 
 
-            myRef.child("Rooms").child(numText).child("player1").setValue(player1);
 
-
-            myRef.child("Rooms").child(numText).child("player2").setValue(player2);
-
-
-
-            myRef.child("Rooms").child(numText).child("grid").setValue(grid);
+            Intent intent = new Intent(CreateRoomActivity.this, Option2.class);
 
 
             valueEventListenerAddRoom = new ValueEventListener() {
@@ -206,7 +208,10 @@ public class CreateRoomActivity extends AppCompatActivity {
                     Log.i("info jog2",snapshot.getValue().toString());
                     namePlayer2Firebase = snapshot.getValue().toString();
                     if (!namePlayer2Firebase.equals("-")){
-                        Toast.makeText(getApplicationContext(), "Ir para proxima activity", Toast.LENGTH_SHORT).show();
+                        intent.putExtra("myNodePlayer", "player1");
+                        intent.putExtra("opponentNodePlayer", "player2");
+                        intent.putExtra("roomNumber", createdRoom);
+                        startActivity(intent);
                         finish();
                     }
                 }
@@ -217,14 +222,14 @@ public class CreateRoomActivity extends AppCompatActivity {
                 }
             };
 
-            myRef.child("Rooms").child(numText).child("player2").child("name").addValueEventListener(valueEventListenerAddRoom);
+            roomReference.child("player2").child("name").addValueEventListener(valueEventListenerAddRoom);
 
             TextView roomCode = findViewById(R.id.textViewRoomCode);
             ImageButton copyCode = findViewById(R.id.copyButton);
             ProgressBar progressBar = findViewById(R.id.progressBar);
             TextView textLoading = findViewById(R.id.textView8);
 
-            roomCode.setText("Código da sala: "+salaCriada);
+            roomCode.setText("Código da sala: "+createdRoom);
 
 
             roomCode.setVisibility(View.VISIBLE);
@@ -250,17 +255,17 @@ public class CreateRoomActivity extends AppCompatActivity {
 
     public void copyCode(View view){
         ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clip = ClipData.newPlainText("textView", salaCriada);
+        ClipData clip = ClipData.newPlainText("textView", createdRoom);
         clipboard.setPrimaryClip(clip);
-        Toast.makeText(getApplicationContext(), "Código da sala copia da área de transferência", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Código da sala copia para a área de transferência", Toast.LENGTH_LONG).show();
     }
 
 
     @Override
     public void onDestroy() {
-        if (salaCriada != null){
-            myRef.child("Rooms").child(salaCriada).child("player2").child("name").removeEventListener(valueEventListenerAddRoom);
-            myRef.child("Rooms").child(salaCriada).removeValue();
+        if (createdRoom != null && namePlayer2Firebase.equals("-")){
+            myRef.child("Rooms").child(createdRoom).child("player2").child("name").removeEventListener(valueEventListenerAddRoom);
+            myRef.child("Rooms").child(createdRoom).removeValue();
         }
         super.onDestroy();
     }

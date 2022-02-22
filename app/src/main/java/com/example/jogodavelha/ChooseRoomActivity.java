@@ -93,11 +93,11 @@ public class ChooseRoomActivity extends AppCompatActivity {
         if (salas.contains(editNumeroSala.getText().toString())){
 
             String digitedNumberRoom = editNumeroSala.getText().toString();
-            DatabaseReference salaReferencia = myRef.child("Rooms").child(digitedNumberRoom);
+            DatabaseReference roomReference = myRef.child("Rooms").child(digitedNumberRoom);
             String[] nomeCompletoJogador =  user.getDisplayName().split(" ");
             String playerName = nomeCompletoJogador[0]+" "+nomeCompletoJogador[nomeCompletoJogador.length - 1];
 
-            salaReferencia.addListenerForSingleValueEvent(new ValueEventListener() {
+            roomReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     Log.i("Info Data", playerName);
@@ -108,16 +108,18 @@ public class ChooseRoomActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(getApplicationContext(), Option2.class);
 
-                    if(player1inFirebase.getName().equals("-")){
-                        salaReferencia.child("player1").setValue(newPlayer);
-                        intent.putExtra("myNodePlayer", "player1");
-                        intent.putExtra("opponentNodePlayer", "player2");
-                        intent.putExtra("roomNumber", digitedNumberRoom);
-                    }else if(player2inFirebase.getName().equals("-")){
-                        salaReferencia.child("player2").setValue(newPlayer);
+                    if(player2inFirebase.getName().equals("-")){
+                        newPlayer.setUsedSymbol(player2inFirebase.getUsedSymbol());
+                        newPlayer.setUserCode(player2inFirebase.getUserCode());
+                        roomReference.child("player2").setValue(newPlayer);
                         intent.putExtra("myNodePlayer", "player2");
                         intent.putExtra("opponentNodePlayer", "player1");
-                        intent.putExtra("roomNumber", digitedNumberRoom);
+                    }else if(player1inFirebase.getName().equals("-")){
+                        newPlayer.setUsedSymbol(player1inFirebase.getUsedSymbol());
+                        newPlayer.setUserCode(player1inFirebase.getUserCode());
+                        roomReference.child("player1").setValue(newPlayer);
+                        intent.putExtra("myNodePlayer", "player1");
+                        intent.putExtra("opponentNodePlayer", "player2");
                     }else{
                         Toast.makeText(getApplicationContext(), "A sala está cheia", Toast.LENGTH_SHORT).show();
                         return;

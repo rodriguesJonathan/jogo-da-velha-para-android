@@ -21,7 +21,6 @@ public class Option1 extends GameActivity{
 
         zerarVezesPreenchidas();
         extra = getIntent().getExtras();
-        vezesPreenchidas = 0;
         this.letraGlobalAtual = extra.getString("simboloInicial","E");//'E' representa um erro
         player1 = (Player) extra.getSerializable("player1");
         player2 = (Player) extra.getSerializable("player2");

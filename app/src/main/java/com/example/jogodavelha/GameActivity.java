@@ -9,7 +9,7 @@ import android.widget.TextView;
 public class GameActivity extends AppCompatActivity {
     protected SquareXorOView[] imagemVermelhas;
     protected boolean alguemGanhou;
-    protected int vezesPreenchidas;
+    protected int vezesPreenchidas = 0;;
 
 
     protected TextView textVezDoJogador;
