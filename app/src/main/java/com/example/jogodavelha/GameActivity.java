@@ -8,9 +8,8 @@ import android.widget.TextView;
 
 public class GameActivity extends AppCompatActivity {
     protected SquareXorOView[] imagemVermelhas;
-    protected boolean alguemGanhou;
-    protected int vezesPreenchidas = 0;;
-
+    protected boolean someoneWon;
+    protected Grid grid = new Grid();
 
     protected TextView textVezDoJogador;
 
@@ -20,7 +19,7 @@ public class GameActivity extends AppCompatActivity {
             tabela11, tabela12, tabela13,
     tabela21, tabela22, tabela23,
     tabela31, tabela32, tabela33;
-    protected SquareXorOView[]  camposTabela;
+    protected SquareXorOView[][]  camposTabela;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,133 +28,136 @@ public class GameActivity extends AppCompatActivity {
         tabela11 = findViewById(R.id.tabela11); tabela12 = findViewById(R.id.tabela12); tabela13 = findViewById(R.id.tabela13);
         tabela21 = findViewById(R.id.tabela21); tabela22 = findViewById(R.id.tabela22); tabela23 = findViewById(R.id.tabela23);
         tabela31 = findViewById(R.id.tabela31); tabela32 = findViewById(R.id.tabela32); tabela33 = findViewById(R.id.tabela33);
-        camposTabela = new SquareXorOView[]{tabela11, tabela12, tabela13, tabela21,
-                tabela22, tabela23, tabela31, tabela32, tabela33};
+        camposTabela = new SquareXorOView[][]{{tabela11, tabela12, tabela13},
+                                              {tabela21, tabela22, tabela23},
+                                              {tabela31, tabela32, tabela33}};
         textVezDoJogador = findViewById(R.id.textVezDoJogador);
     }
 
 
-    public void inserirXO(View view){
+    public void insertXO(View view){
 
     }
 
-    public void reiniciarJogo (View view){
+    public void restartGame(View view){
 
     }
 
 
-    public void verificarVencedor(SquareXorOView obj) {
+    public void checkWinner(Grid grid) {
         imagemVermelhas = new SquareXorOView[3];
-        if (obj.getId() == R.id.tabela11){//Linha 1 coluna 1 (ponta 1)
-            if (coluna1EstaIgual()){
+        int currentImageId = grid.getCurrentImageId();
+
+        if (currentImageId == R.id.tabela11){//Linha 1 coluna 1 (ponta 1)
+            if (column1IsEven()){
                 imagemVermelhas[0] = tabela11;
                 imagemVermelhas[1] = tabela21;
                 imagemVermelhas[2] = tabela31;
-            }else if(linha1EstaIgual()){
+            }else if(line1IsEven()){
                 imagemVermelhas[0] = tabela11;
                 imagemVermelhas[1] = tabela12;
                 imagemVermelhas[2] = tabela13;
-            }else if(diagonal1EstaIgual()){
+            }else if(diagonal1IsEven()){
                 imagemVermelhas[0] = tabela11;
                 imagemVermelhas[1] = tabela22;
                 imagemVermelhas[2] = tabela33;
             }
-        }else if(obj.getId() == R.id.tabela12){//Linha 1 coluna 2
-            if(coluna2EstaIgual()){
+        }else if(currentImageId == R.id.tabela12){//Linha 1 coluna 2
+            if(column2IsEven()){
                 imagemVermelhas[0] = tabela12;
                 imagemVermelhas[1] = tabela22;
                 imagemVermelhas[2] = tabela32;
-            }else if(linha1EstaIgual()){
+            }else if(line1IsEven()){
                 imagemVermelhas[0] = tabela11;
                 imagemVermelhas[1] = tabela12;
                 imagemVermelhas[2] = tabela13;
             }
-        }else if(obj.getId() == R.id.tabela13){//Linha 1 coluna 3 (ponta 2)
-            if(linha1EstaIgual()) {
+        }else if(currentImageId == R.id.tabela13){//Linha 1 coluna 3 (ponta 2)
+            if(line1IsEven()) {
                 imagemVermelhas[0] = tabela11;
                 imagemVermelhas[1] = tabela12;
                 imagemVermelhas[2] = tabela13;
-            }else if(coluna3EstaIgual()){
+            }else if(column3IsEven()){
                 imagemVermelhas[0] = tabela13;
                 imagemVermelhas[1] = tabela23;
                 imagemVermelhas[2] = tabela33;
-            }else if(diagonal2EstaIgual()){
+            }else if(diagonal2IsEven()){
                 imagemVermelhas[0] = tabela13;
                 imagemVermelhas[1] = tabela22;
                 imagemVermelhas[2] = tabela31;
             }
-        }else if(obj.getId() == R.id.tabela21) {//Linha 2 coluna 1
-            if (coluna1EstaIgual()){
+        }else if(currentImageId == R.id.tabela21) {//Linha 2 coluna 1
+            if (column1IsEven()){
                 imagemVermelhas[0] = tabela11;
                 imagemVermelhas[1] = tabela21;
                 imagemVermelhas[2] = tabela31;
-            }else if(linha2EstaIgual()){
+            }else if(line2IsEven()){
                 imagemVermelhas[0] = tabela21;
                 imagemVermelhas[1] = tabela22;
                 imagemVermelhas[2] = tabela23;
             }
-        }else if(obj.getId() == R.id.tabela22) {//Linha 2 coluna 2 (meio)
-            if(linha2EstaIgual()){
+        }else if(currentImageId == R.id.tabela22) {//Linha 2 coluna 2 (meio)
+            if(line2IsEven()){
                 imagemVermelhas[0] = tabela21;
                 imagemVermelhas[1] = tabela22;
                 imagemVermelhas[2] = tabela23;
-            }else if(coluna2EstaIgual()){
+            }else if(column2IsEven()){
                 imagemVermelhas[0] = tabela12;
                 imagemVermelhas[1] = tabela22;
                 imagemVermelhas[2] = tabela32;
-            }else if(diagonal1EstaIgual()){
+            }else if(diagonal1IsEven()){
                 imagemVermelhas[0] = tabela11;
                 imagemVermelhas[1] = tabela22;
                 imagemVermelhas[2] = tabela33;
-            }else if(diagonal2EstaIgual()){
+            }else if(diagonal2IsEven()){
                 imagemVermelhas[0] = tabela13;
                 imagemVermelhas[1] = tabela22;
                 imagemVermelhas[2] = tabela31;
             }
-        }else if(obj.getId() == R.id.tabela23) {//Linha 2 coluna 3
-                if(linha2EstaIgual()) {
+        }else if(currentImageId == R.id.tabela23) {//Linha 2 coluna 3
+                if(line2IsEven()) {
                     imagemVermelhas[0] = tabela21;
                     imagemVermelhas[1] = tabela22;
                     imagemVermelhas[2] = tabela23;
-                }else if(coluna3EstaIgual()){
+                }else if(column3IsEven()){
                     imagemVermelhas[0] = tabela13;
                     imagemVermelhas[1] = tabela23;
                     imagemVermelhas[2] = tabela33;
                 }
-        }else if(obj.getId() == R.id.tabela31) {//Linha 3 coluna 1 (ponta 3)
-                if (coluna1EstaIgual()){
+        }else if(currentImageId == R.id.tabela31) {//Linha 3 coluna 1 (ponta 3)
+                if (column1IsEven()){
                     imagemVermelhas[0] = tabela11;
                     imagemVermelhas[1] = tabela21;
                     imagemVermelhas[2] = tabela31;
-                }else if(linha3EstaIgual()){
+                }else if(line3IsEven()){
                     imagemVermelhas[0] = tabela31;
                     imagemVermelhas[1] = tabela32;
                     imagemVermelhas[2] = tabela33;
-                }else if(diagonal2EstaIgual()){
+                }else if(diagonal2IsEven()){
                     imagemVermelhas[0] = tabela13;
                     imagemVermelhas[1] = tabela22;
                     imagemVermelhas[2] = tabela31;
                 }
-        }else if(obj.getId() == R.id.tabela32) {//Linha 3 coluna 2
-                if(linha3EstaIgual()){
+        }else if(currentImageId == R.id.tabela32) {//Linha 3 coluna 2
+                if(line3IsEven()){
                     imagemVermelhas[0] = tabela31;
                     imagemVermelhas[1] = tabela32;
                     imagemVermelhas[2] = tabela33;
-                }else if(coluna2EstaIgual()){
+                }else if(column2IsEven()){
                     imagemVermelhas[0] = tabela12;
                     imagemVermelhas[1] = tabela22;
                     imagemVermelhas[2] = tabela32;
                 }
-        }else if(obj.getId() == R.id.tabela33) {//Linha 3 coluna 3 (ponta 4)
-                if(linha3EstaIgual()){
+        }else if(currentImageId == R.id.tabela33) {//Linha 3 coluna 3 (ponta 4)
+                if(line3IsEven()){
                     imagemVermelhas[0] = tabela31;
                     imagemVermelhas[1] = tabela32;
                     imagemVermelhas[2] = tabela33;
-                }else if(coluna3EstaIgual()){
+                }else if(column3IsEven()){
                     imagemVermelhas[0] = tabela13;
                     imagemVermelhas[1] = tabela23;
                     imagemVermelhas[2] = tabela33;
-                }else if(diagonal1EstaIgual()){
+                }else if(diagonal1IsEven()){
                     imagemVermelhas[0] = tabela11;
                     imagemVermelhas[1] = tabela22;
                     imagemVermelhas[2] = tabela33;
@@ -164,14 +166,14 @@ public class GameActivity extends AppCompatActivity {
 
         if (imagemVermelhas[0] != null){
             textVezDoJogador.setText("Opa! Temos um vencedor");
-            alguemGanhou = true;
+            someoneWon = true;
             for(SquareXorOView imagemVermelha : imagemVermelhas){
                imagemVermelha.setColorFilter(Color.RED);
             }
 
             informarVencedor();
         }
-        if (!alguemGanhou && this.vezesPreenchidas == 9){
+        if (!someoneWon && grid.getAddedSimblesLength() == 9){
 
             informarEmpate();
 
@@ -187,37 +189,37 @@ public class GameActivity extends AppCompatActivity {
     }
 
 
-    public boolean coluna1EstaIgual(){
-        String letra11 = this.tabela11.getLetraAtual(), letra21 = this.tabela21.getLetraAtual(), letra31 = this.tabela31.getLetraAtual();
-        return letra11.equals(letra21) && letra11.equals(letra31);
+    public boolean column1IsEven(){
+        String grid11 = grid.getRow1column1(), grid21 = grid.getRow2column1(), grid31 = grid.getRow3column1();
+        return !grid11.equals("-") && grid11.equals(grid21) && grid11.equals(grid31);
     }
-    public boolean coluna2EstaIgual(){
-        String letra12 = this.tabela12.getLetraAtual(), letra22 = this.tabela22.getLetraAtual(), letra32 = this.tabela32.getLetraAtual();
-        return letra12.equals(letra22) && letra12.equals(letra32);
+    public boolean column2IsEven(){
+        String grid12 = grid.getRow1column2(), grid22 = grid.getRow2column2(), grid32 = grid.getRow3column2();
+        return !grid12.equals("-") && grid12.equals(grid22) && grid12.equals(grid32);
     }
-    public boolean coluna3EstaIgual(){
-        String letra13 = this.tabela13.getLetraAtual(), letra23 = this.tabela23.getLetraAtual(), letra33 = this.tabela33.getLetraAtual();
-        return letra13.equals(letra23) && letra13.equals(letra33);
+    public boolean column3IsEven(){
+        String grid13 = grid.getRow1column3(), grid23 = grid.getRow2column3(), grid33 = grid.getRow3column3();
+        return !grid13.equals("-") && grid13.equals(grid23) && grid13.equals(grid33);
     }
-    public boolean linha1EstaIgual(){
-        String letra11 = this.tabela11.getLetraAtual(), letra12 = this.tabela12.getLetraAtual(), letra13 = this.tabela13.getLetraAtual();
-        return letra11.equals(letra12) && letra11.equals(letra13);
+    public boolean line1IsEven(){
+        String grid11 = grid.getRow1column1(), grid12 = grid.getRow1column2(), grid13 = grid.getRow1column3();
+        return !grid11.equals("-") && grid11.equals(grid12) && grid11.equals(grid13);
     }
-    public boolean linha2EstaIgual(){
-        String letra21 = this.tabela21.getLetraAtual(), letra22 = this.tabela22.getLetraAtual(), letra23 = this.tabela23.getLetraAtual();
-        return letra21.equals(letra22) && letra21.equals(letra23);
+    public boolean line2IsEven(){
+        String grid21 = grid.getRow2column1(), grid22 = grid.getRow2column2(), grid23 = grid.getRow2column3();
+        return !grid21.equals("-") && grid21.equals(grid22) && grid21.equals(grid23);
     }
-    public boolean linha3EstaIgual(){
-        String letra31 = this.tabela31.getLetraAtual(), letra32 = this.tabela32.getLetraAtual(), letra33 = this.tabela33.getLetraAtual();
-        return letra31.equals(letra32) && letra31.equals(letra33);
+    public boolean line3IsEven(){
+        String grid31 = grid.getRow3column1(), grid32 = grid.getRow3column2(), grid33 = grid.getRow3column3();
+        return !grid31.equals("-") && grid31.equals(grid32) && grid31.equals(grid33);
     }
-    public boolean diagonal1EstaIgual(){
-        String letra11 = this.tabela11.getLetraAtual(), letra22 = this.tabela22.getLetraAtual(), letra33 = this.tabela33.getLetraAtual();
-        return letra11.equals(letra22) && letra11.equals(letra33);
+    public boolean diagonal1IsEven(){
+        String grid11 = grid.getRow1column1(), grid22 = grid.getRow2column2(), grid33 = grid.getRow3column3();
+        return !grid11.equals("-") && grid11.equals(grid22) && grid11.equals(grid33);
     }
-    public boolean diagonal2EstaIgual(){
-        String letra13 = this.tabela13.getLetraAtual(), letra22 = this.tabela22.getLetraAtual(), letra31 = this.tabela31.getLetraAtual();
-        return letra13.equals(letra22) && letra13.equals(letra31);
+    public boolean diagonal2IsEven(){
+        String grid13 = grid.getRow1column3(), grid22 = grid.getRow2column2(), grid31 = grid.getRow3column1();
+        return !grid13.equals("-") && grid13.equals(grid22) && grid13.equals(grid31);
     }
 
 

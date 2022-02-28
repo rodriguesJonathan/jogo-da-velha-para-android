@@ -7,8 +7,9 @@ public class Player implements Serializable {
     private String usedSymbol = "-";
     private String userCode = "-";
 
-    Player(){    }
-    Player(String name){
+    public Player(){    }
+
+    public Player(String name){
         this.name = name;
     }
 

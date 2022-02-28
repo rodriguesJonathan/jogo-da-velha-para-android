@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/activity_input_name_scene"
-    tools:context=".InputNameActivity">
+    tools:context=".offline2playersClasses.InputNameActivity">
 
     <TextView
         android:id="@+id/textoJogador1"

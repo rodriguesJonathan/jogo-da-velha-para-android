@@ -1,4 +1,4 @@
-package com.example.jogodavelha;
+package com.example.jogodavelha.online2playersClasses;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,7 +9,6 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
@@ -19,6 +18,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.jogodavelha.Grid;
+import com.example.jogodavelha.Player;
+import com.example.jogodavelha.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -76,7 +78,6 @@ public class CreateRoomActivity extends AppCompatActivity {
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
                 salas.remove(snapshot.getKey());
-                Log.i("Info onChildRemoved", snapshot.getKey());
             }
 
             @Override
@@ -109,11 +110,13 @@ public class CreateRoomActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser) ;
+        /*
         if (currentUser != null){
             Log.i("Login", "Está logado");
         }else {
             Log.i("Login", "Não está logado");
         }
+         */
     }
 
     public void showSwitchSettings(View view){
@@ -194,7 +197,9 @@ public class CreateRoomActivity extends AppCompatActivity {
             roomReference.child("grid").setValue(grid);
             roomReference.child("player1").setValue(player1);
             roomReference.child("player2").setValue(player2);
-            roomReference.child("currentImageId").setValue("-");
+            roomReference.child("restart").child("player1").setValue("-");
+            roomReference.child("restart").child("player2").setValue("-");
+            roomReference.child("winner").setValue("-");
 
 
 
@@ -205,7 +210,6 @@ public class CreateRoomActivity extends AppCompatActivity {
             valueEventListenerAddRoom = new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Log.i("info jog2",snapshot.getValue().toString());
                     namePlayer2Firebase = snapshot.getValue().toString();
                     if (!namePlayer2Firebase.equals("-")){
                         intent.putExtra("myNodePlayer", "player1");

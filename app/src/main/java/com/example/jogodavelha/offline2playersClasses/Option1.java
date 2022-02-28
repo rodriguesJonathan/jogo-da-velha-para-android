@@ -1,4 +1,4 @@
-package com.example.jogodavelha;
+package com.example.jogodavelha.offline2playersClasses;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -6,7 +6,12 @@ import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
 
-public class Option1 extends GameActivity{
+import com.example.jogodavelha.GameActivity;
+import com.example.jogodavelha.Player;
+import com.example.jogodavelha.R;
+import com.example.jogodavelha.SquareXorOView;
+
+public class Option1 extends GameActivity {
     private static String letraGlobalAtual;
     private Bundle extra;
     private Player player1, player2;
@@ -15,11 +20,6 @@ public class Option1 extends GameActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
-
-
-        zerarVezesPreenchidas();
         extra = getIntent().getExtras();
         this.letraGlobalAtual = extra.getString("simboloInicial","E");//'E' representa um erro
         player1 = (Player) extra.getSerializable("player1");
@@ -35,27 +35,31 @@ public class Option1 extends GameActivity{
 
 
     @Override
-    public void inserirXO(View view){
+    public void insertXO(View view){
+        grid.setCurrentImageId(view.getId());
         SquareXorOView image = findViewById(view.getId());
 
-        if (image.getLetraAtual().equals("_") && !alguemGanhou){
+        String transitionName = view.getTransitionName();
+        int row = Integer.parseInt(transitionName.substring(0,1));
+        int column = Integer.parseInt(transitionName.substring(1,2));
+
+        if (grid.getInRowAndColumn(row, column).equals("-") && !someoneWon){
             if (this.letraGlobalAtual.equals("x")){
                 image.setImageResource(R.drawable.ic_x_letter_svg);
             }else if(this.letraGlobalAtual.equals("o")){
                 image.setImageResource(R.drawable.ic_o_letter_svg);
             }
-            image.setLetraAtual(this.letraGlobalAtual);
-            this.vezesPreenchidas += 1;
+            grid.setInRowAndColumn(this.letraGlobalAtual, row, column);
             this.letraGlobalAtual = this.letraGlobalAtual.equals("x") ? "o" : "x";
             textVezDoJogador.setText("É a vez de "+  (this.letraGlobalAtual.equals(player1.getUsedSymbol()) ? player1.getName() :  player2.getName())+".");
-            verificarVencedor(image);//Sempre está na última linha do if
+            checkWinner(grid);//Sempre está na última linha do if
         }
     }
 
 
     @Override
-    public void reiniciarJogo (View view){
-        alguemGanhou = false;
+    public void restartGame(View view){
+        someoneWon = false;
         this.letraGlobalAtual = extra.getString("simboloInicial");
         if (player1.getUsedSymbol().equals(letraGlobalAtual)){
             textVezDoJogador.setText("É a vez de "+ player1.getName()+".");
@@ -64,7 +68,7 @@ public class Option1 extends GameActivity{
             textVezDoJogador.setText("É a vez de "+ player2.getName()+".");
         }
 
-        if (this.vezesPreenchidas > 0 && imagemVermelhas[0] != null){
+        if (grid.getAddedSimblesLength() > 0 && imagemVermelhas[0] != null){
             for(SquareXorOView imagemVermelha : imagemVermelhas){
                 imagemVermelha.setColorFilter(Color.BLACK);
             }
@@ -97,10 +101,11 @@ public class Option1 extends GameActivity{
 
     public void zerarVezesPreenchidas (){
 
-        for (SquareXorOView campo : camposTabela) {
-            campo.setImageResource(R.drawable.vazio);
-            campo.setLetraAtual("_");
+        for (int row = 0; row < 3; row++){
+            for (int column = 0; column < 3; column++){
+                camposTabela[row][column].setImageResource(R.drawable.vazio);
+            }
         }
-        vezesPreenchidas = 0;
+       grid.restart();
     }
 }

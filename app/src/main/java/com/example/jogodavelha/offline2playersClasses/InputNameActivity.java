@@ -1,4 +1,4 @@
-package com.example.jogodavelha;
+package com.example.jogodavelha.offline2playersClasses;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,9 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.jogodavelha.Player;
+import com.example.jogodavelha.R;
 
 public class InputNameActivity extends AppCompatActivity {
     private EditText editNomeJogador1, editNomeJogador2;
@@ -51,7 +54,7 @@ public class InputNameActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Informe o nome do "+numeroDoJogador+"° jogador.", Toast.LENGTH_LONG).show();
 
         }else{
-            Intent intent = new Intent(getApplicationContext(),Option1.class);
+            Intent intent = new Intent(getApplicationContext(), Option1.class);
 
             Player player1 = new Player(editNomeJogador1.getText().toString());
             Player player2 = new Player(editNomeJogador2.getText().toString());
