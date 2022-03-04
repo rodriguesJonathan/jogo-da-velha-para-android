@@ -87,6 +87,7 @@ public class Grid extends Object {
             }
         }
         addedSimblesLength = 0;
+        currentPlayerCode = firstPlayerCode;
     }
 
     public int getAddedSimblesLength() {

@@ -94,14 +94,8 @@ public class Option2  extends GameActivity {
                     build.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            for(int row = 1; row <= 3; row++){
-                                for(int column = 1; column<=3; column++){
-                                    grid.setInRowAndColumn("-", row, column);
-                                }
-                            }
 
-
-                            grid.setCurrentPlayerCode(grid.getFirstPlayerCode());
+                            grid.restart();
                             HashMap<String,String> subMap = new HashMap<>();
 
                             subMap.put(myNodePlayer, "y");
@@ -109,8 +103,6 @@ public class Option2  extends GameActivity {
 
                             HashMap<String,Object> map = new HashMap<>();
 
-
-                            map.put("currentImageId", "-");
                             map.put("grid",grid);
                             map.put(myNodePlayer, mySelfPlayer);
                             map.put(opponentNodePlayer, opponentPlayer);
@@ -182,14 +174,19 @@ public class Option2  extends GameActivity {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                //String key = snapshot.getKey();
-                //String rowColomn = key.substring(3,4) + key.substring(11);
+                String key = snapshot.getKey();
+
                 //currentPlayerCode = snapshot.child("grid").child("currentPlayerCode").getValue().toString();
                 Log.i("info", "ChildListener:");
-
-                if (snapshot.getKey().equals("currentImageId")){
+                if (key.equals("currentImageId")){
                     image = findViewById(Integer.parseInt(snapshot.getValue().toString()));
-                }else{
+                }else if(key.substring(0,3).equals("row")){
+                    int row = Integer.parseInt(key.substring(3,4));
+                    int colomn = Integer.parseInt(key.substring(11));
+                    if(currentPlayerCode.equals(mySelfPlayer.getUserCode())){
+                        grid.setInRowAndColumn(snapshot.getValue().toString(), row, colomn);
+                    }
+
                     if (snapshot.getValue().toString().equals("O")){
                         image.setImageResource(R.drawable.ic_o_letter_svg);
                     }else if(snapshot.getValue().toString().equals("X")) {
