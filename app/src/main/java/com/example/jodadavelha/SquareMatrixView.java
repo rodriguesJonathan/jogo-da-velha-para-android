@@ -1,8 +1,7 @@
-package com.example.jogodavelha;
+package com.example.jodadavelha;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 
 public class SquareMatrixView extends androidx.appcompat.widget.AppCompatImageView {
 

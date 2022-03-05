@@ -1,4 +1,4 @@
-package com.example.jogodavelha.offline2playersClasses;
+package com.example.jodadavelha.offline2playersClasses;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -6,10 +6,10 @@ import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.example.jogodavelha.GameActivity;
-import com.example.jogodavelha.Player;
-import com.example.jogodavelha.R;
-import com.example.jogodavelha.SquareXorOView;
+import com.example.jodadavelha.GameActivity;
+import com.example.jodadavelha.Player;
+import com.example.jodadavelha.R;
+import com.example.jodadavelha.SquareXorOView;
 
 public class Option1 extends GameActivity {
     private static String letraGlobalAtual;
@@ -81,7 +81,7 @@ public class Option1 extends GameActivity {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Temos um vencedor(a)");
         dialog.setMessage("Meus parabéns, "+( ! player1.getUsedSymbol().equals(letraGlobalAtual) ? player1.getName() : player2.getName())+", pela tua vitória!!");
-        dialog.setPositiveButton("Avançar", null);
+        dialog.setPositiveButton("Certo", null);
         dialog.create();
         dialog.show();
     }
@@ -93,7 +93,7 @@ public class Option1 extends GameActivity {
         dialog.setTitle("Deu velha!!");
         dialog.setMessage("Vocês devem ter o mesmo QI.");
 
-        dialog.setPositiveButton("Avançar", null);
+        dialog.setPositiveButton("Certo", null);
 
         dialog.create();
         dialog.show();

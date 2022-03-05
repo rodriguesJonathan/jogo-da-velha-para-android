@@ -1,6 +1,6 @@
-package com.example.jogodavelha;
+package com.example.jodadavelha;
 
-import com.example.jogodavelha.R;
+import com.example.jodadavelha.R;
 
 public class Grid extends Object {
     private int addedSimblesLength = 0;
@@ -93,4 +93,41 @@ public class Grid extends Object {
     public int getAddedSimblesLength() {
         return addedSimblesLength;
     }
+
+    public void setRow1column1(String simbol) {
+        grid[0][0] = simbol;
+    }
+
+    public void setRow1column2(String simbol) {
+        grid[0][1] = simbol;
+    }
+
+    public void setRow1column3(String simbol) {
+        grid[0][2] = simbol;
+    }
+
+    public void setRow2column1(String simbol) {
+        grid[1][0] = simbol;
+    }
+
+    public void setRow2column2(String simbol) {
+        grid[1][1] = simbol;
+    }
+
+    public void setRow2column3(String simbol) {
+        grid[1][2] = simbol;
+    }
+
+    public void setRow3column1(String simbol) {
+        grid[2][0] = simbol;
+    }
+
+    public void setRow3column2(String simbol) {
+        grid[2][1] = simbol;
+    }
+
+    public void setRow3column3(String simbol) {
+        grid[2][2] = simbol;
+    }
+
 }

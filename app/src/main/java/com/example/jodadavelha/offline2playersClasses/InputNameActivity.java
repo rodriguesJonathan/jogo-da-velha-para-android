@@ -1,4 +1,4 @@
-package com.example.jogodavelha.offline2playersClasses;
+package com.example.jodadavelha.offline2playersClasses;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,8 +10,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.jogodavelha.Player;
-import com.example.jogodavelha.R;
+import com.example.jodadavelha.Player;
+import com.example.jodadavelha.R;
 
 public class InputNameActivity extends AppCompatActivity {
     private EditText editNomeJogador1, editNomeJogador2;

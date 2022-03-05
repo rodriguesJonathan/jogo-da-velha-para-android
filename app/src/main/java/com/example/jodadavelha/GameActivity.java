@@ -1,4 +1,4 @@
-package com.example.jogodavelha;
+package com.example.jodadavelha;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
@@ -8,8 +8,8 @@ import android.widget.TextView;
 
 public class GameActivity extends AppCompatActivity {
     protected SquareXorOView[] imagemVermelhas;
-    protected boolean someoneWon;
-    protected Grid grid = new Grid();
+    protected boolean someoneWon = false;
+    protected Grid grid;
 
     protected TextView textVezDoJogador;
 
@@ -174,7 +174,7 @@ public class GameActivity extends AppCompatActivity {
             informarVencedor();
         }
         if (!someoneWon && grid.getAddedSimblesLength() == 9){
-
+            someoneWon = true;
             informarEmpate();
 
         }

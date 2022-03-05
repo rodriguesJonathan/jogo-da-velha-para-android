@@ -1,4 +1,4 @@
-package com.example.jogodavelha.online2playersClasses;
+package com.example.jodadavelha.online2playersClasses;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,9 +18,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.jogodavelha.Grid;
-import com.example.jogodavelha.Player;
-import com.example.jogodavelha.R;
+import com.example.jodadavelha.Grid;
+import com.example.jodadavelha.Player;
+import com.example.jodadavelha.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -261,7 +261,7 @@ public class CreateRoomActivity extends AppCompatActivity {
         ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("textView", createdRoom);
         clipboard.setPrimaryClip(clip);
-        Toast.makeText(getApplicationContext(), "Código da sala copia para a área de transferência", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Código da sala copiado para a área de transferência", Toast.LENGTH_LONG).show();
     }
 
 
