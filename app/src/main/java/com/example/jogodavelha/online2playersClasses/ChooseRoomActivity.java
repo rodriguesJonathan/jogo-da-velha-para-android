@@ -1,4 +1,4 @@
-package com.example.jodadavelha.online2playersClasses;
+package com.example.jogodavelha.online2playersClasses;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.jodadavelha.Player;
+import com.example.jogodavelha.Player;
 import com.example.jodadavelha.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

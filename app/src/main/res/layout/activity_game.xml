@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GameActivity">
+    tools:context="com.example.jogodavelha.GameActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -13,7 +13,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.1" />
 
-    <com.example.jodadavelha.SquareMatrixView
+    <com.example.jogodavelha.SquareMatrixView
         android:id="@+id/squareImageView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.9" />
 
-    <com.example.jodadavelha.SquareXorOView
+    <com.example.jogodavelha.SquareXorOView
         android:id="@+id/tabela11"
         android:transitionName="11"
         android:layout_width="0dp"
@@ -48,7 +48,7 @@
         app:layout_constraintVertical_chainStyle="spread" />
 
 
-    <com.example.jodadavelha.SquareXorOView
+    <com.example.jogodavelha.SquareXorOView
         android:id="@+id/tabela12"
         android:transitionName="12"
         android:layout_width="0dp"
@@ -62,7 +62,7 @@
         app:layout_constraintTop_toTopOf="@+id/squareImageView"
         app:layout_constraintVertical_bias="0.050000012" />
 
-    <com.example.jodadavelha.SquareXorOView
+    <com.example.jogodavelha.SquareXorOView
         android:id="@+id/tabela13"
         android:transitionName="13"
         android:layout_width="0dp"
@@ -76,7 +76,7 @@
         app:layout_constraintTop_toTopOf="@+id/squareImageView"
         app:layout_constraintVertical_bias="0.050000012" />
 
-    <com.example.jodadavelha.SquareXorOView
+    <com.example.jogodavelha.SquareXorOView
         android:id="@+id/tabela21"
         android:transitionName="21"
         android:layout_width="0dp"
@@ -89,7 +89,7 @@
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="@+id/squareImageView" />
 
-    <com.example.jodadavelha.SquareXorOView
+    <com.example.jogodavelha.SquareXorOView
         android:id="@+id/tabela22"
         android:transitionName="22"
         android:layout_width="0dp"
@@ -102,7 +102,7 @@
         app:layout_constraintStart_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toTopOf="@+id/squareImageView" />
 
-    <com.example.jodadavelha.SquareXorOView
+    <com.example.jogodavelha.SquareXorOView
         android:id="@+id/tabela23"
         android:transitionName="23"
         android:layout_width="0dp"
@@ -115,7 +115,7 @@
         app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toTopOf="@+id/squareImageView" />
 
-    <com.example.jodadavelha.SquareXorOView
+    <com.example.jogodavelha.SquareXorOView
         android:id="@+id/tabela31"
         android:transitionName="31"
         android:layout_width="0dp"
@@ -130,7 +130,7 @@
         app:layout_constraintTop_toTopOf="@+id/squareImageView"
         app:layout_constraintVertical_bias="0.95" />
 
-    <com.example.jodadavelha.SquareXorOView
+    <com.example.jogodavelha.SquareXorOView
         android:id="@+id/tabela32"
         android:transitionName="32"
         android:layout_width="0dp"
@@ -144,7 +144,7 @@
         app:layout_constraintTop_toTopOf="@+id/squareImageView"
         app:layout_constraintVertical_bias="0.95" />
 
-    <com.example.jodadavelha.SquareXorOView
+    <com.example.jogodavelha.SquareXorOView
         android:id="@+id/tabela33"
         android:transitionName="33"
         android:layout_width="0dp"

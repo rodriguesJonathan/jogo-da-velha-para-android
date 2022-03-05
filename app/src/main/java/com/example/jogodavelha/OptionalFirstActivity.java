@@ -1,12 +1,13 @@
-package com.example.jodadavelha;
+package com.example.jogodavelha;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.jodadavelha.offline2playersClasses.InputNameActivity;
-import com.example.jodadavelha.online2playersClasses.AuthActivity;
+import com.example.jodadavelha.R;
+import com.example.jogodavelha.offline2playersClasses.InputNameActivity;
+import com.example.jogodavelha.online2playersClasses.AuthActivity;
 
 public class OptionalFirstActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.jodadavelha.online2playersClasses;
+package com.example.jogodavelha.online2playersClasses;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

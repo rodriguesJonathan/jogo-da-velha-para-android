@@ -1,4 +1,4 @@
-package com.example.jodadavelha.online2playersClasses;
+package com.example.jogodavelha.online2playersClasses;
 
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -10,10 +10,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
-import com.example.jodadavelha.GameActivity;
-import com.example.jodadavelha.Grid;
-import com.example.jodadavelha.Player;
-import com.example.jodadavelha.SquareXorOView;
+import com.example.jogodavelha.GameActivity;
+import com.example.jogodavelha.Grid;
+import com.example.jogodavelha.Player;
+import com.example.jogodavelha.SquareXorOView;
 import com.example.jodadavelha.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

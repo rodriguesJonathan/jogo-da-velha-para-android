@@ -1,4 +1,4 @@
-package com.example.jodadavelha.offline2playersClasses;
+package com.example.jogodavelha.offline2playersClasses;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -6,10 +6,10 @@ import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.example.jodadavelha.GameActivity;
-import com.example.jodadavelha.Player;
+import com.example.jogodavelha.GameActivity;
+import com.example.jogodavelha.Player;
 import com.example.jodadavelha.R;
-import com.example.jodadavelha.SquareXorOView;
+import com.example.jogodavelha.SquareXorOView;
 
 public class Option1 extends GameActivity {
     private static String letraGlobalAtual;

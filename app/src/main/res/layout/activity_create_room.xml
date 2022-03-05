@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".online2playersClasses.CreateRoomActivity"
+    tools:context="com.example.jogodavelha.online2playersClasses.CreateRoomActivity"
     android:fillViewport="true">
 
 
