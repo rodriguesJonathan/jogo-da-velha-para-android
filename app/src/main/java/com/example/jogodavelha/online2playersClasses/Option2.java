@@ -14,7 +14,7 @@ import com.example.jogodavelha.GameActivity;
 import com.example.jogodavelha.Grid;
 import com.example.jogodavelha.Player;
 import com.example.jogodavelha.SquareXorOView;
-import com.example.jodadavelha.R;
+import com.example.jogodavelha.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,6 +35,7 @@ public class Option2  extends GameActivity {
     private SquareXorOView image;
     private String myNodePlayer;
     private String opponentNodePlayer;
+    private ValueEventListener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,32 +46,16 @@ public class Option2  extends GameActivity {
         opponentNodePlayer = extra.getString("opponentNodePlayer");
         textVezDoJogador = findViewById(R.id.textVezDoJogador);
 
-        myRef.child("Rooms").child(roomNumber).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                Log.i("info", "SingleListener");
-                mySelfPlayer = snapshot.child(myNodePlayer).getValue(Player.class);
-                opponentPlayer = snapshot.child(opponentNodePlayer).getValue(Player.class);
-                currentPlayerCode = snapshot.child("grid").child("currentPlayerCode").getValue().toString();
-                grid = snapshot.child("grid").getValue(Grid.class);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-
-        myRef.child("Rooms").child(roomNumber).addValueEventListener(new ValueEventListener() {
+        listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 Log.i("info", "EventListener");
 
                 grid = snapshot.child("grid").getValue(Grid.class);
-
+                mySelfPlayer = snapshot.child(myNodePlayer).getValue(Player.class);
+                opponentPlayer = snapshot.child(opponentNodePlayer).getValue(Player.class);
 
 
 
@@ -100,7 +85,7 @@ public class Option2  extends GameActivity {
 
                 if (mySelfPlayer.getUserCode().equals(currentPlayerCode)) {
                     textVezDoJogador.setText("É a tua vez.");
-                } else {
+                } else if(opponentPlayer.getUserCode().equals(currentPlayerCode)) {
                     textVezDoJogador.setText("É a vez de " + opponentPlayer.getName() + ".");
                 }
 
@@ -195,7 +180,9 @@ public class Option2  extends GameActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };
+
+        myRef.child("Rooms").child(roomNumber).addValueEventListener(listener);
 
 
     }
@@ -239,10 +226,11 @@ public class Option2  extends GameActivity {
     protected void informarVencedor(){
         AlertDialog.Builder build = new AlertDialog.Builder(Option2.this);
         build.setTitle("Temos um vencedor(a)");
-        if(currentPlayerCode.equals(mySelfPlayer.getUserCode())){
+
+        if(!grid.getCurrentPlayerCode().equals(mySelfPlayer.getUserCode())){
             build.setMessage("Meus parabéns, "+mySelfPlayer.getName()+", pela tua vitória!!");
         }else{
-            build.setMessage("Você perdeu!\n "+opponentPlayer.getName()+" ganhou.");
+            build.setMessage("Você perdeu!\n"+opponentPlayer.getName()+" ganhou.");
         }
         build.setPositiveButton("Certo", null);
         AlertDialog dialog = build.create();
@@ -257,6 +245,18 @@ public class Option2  extends GameActivity {
         build.setPositiveButton("Certo", null);
         AlertDialog dialog = build.create();
         dialog.show();
+    }
+
+    @Override
+    public void onDestroy() {
+        myRef.child("Rooms").child(roomNumber).removeEventListener(listener);
+        if (opponentPlayer.getName().equals("-") && !mySelfPlayer.getName().equals("-")){
+            myRef.child("Rooms").child(roomNumber).removeValue();
+        }else if(!opponentPlayer.getName().equals("-") && !mySelfPlayer.getName().equals("-")) {
+            mySelfPlayer.setName("-");
+            myRef.child("Rooms").child(roomNumber).child(myNodePlayer).setValue(mySelfPlayer);
+        }
+        super.onDestroy();
     }
 
 }

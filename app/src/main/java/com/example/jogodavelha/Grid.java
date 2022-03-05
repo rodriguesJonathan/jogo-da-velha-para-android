@@ -1,7 +1,5 @@
 package com.example.jogodavelha;
 
-import com.example.jodadavelha.R;
-
 public class Grid extends Object {
     private int addedSimblesLength = 0;
     private int currentImageId = 0;

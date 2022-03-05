@@ -1,4 +1,4 @@
-package com.example.jodadavelha;
+package com.example.jogodavelha;
 
 import android.content.Context;
 

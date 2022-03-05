@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.jodadavelha.R;
-
 public class GameActivity extends AppCompatActivity {
     protected SquareXorOView[] imagemVermelhas;
     protected boolean someoneWon = false;

@@ -8,7 +8,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.example.jogodavelha.GameActivity;
 import com.example.jogodavelha.Player;
-import com.example.jodadavelha.R;
+import com.example.jogodavelha.R;
 import com.example.jogodavelha.SquareXorOView;
 
 public class Option1 extends GameActivity {

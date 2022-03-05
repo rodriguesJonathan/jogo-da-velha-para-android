@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jogodavelha.Player;
-import com.example.jodadavelha.R;
+import com.example.jogodavelha.R;
 
 public class InputNameActivity extends AppCompatActivity {
     private EditText editNomeJogador1, editNomeJogador2;

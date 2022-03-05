@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.example.jogodavelha.Grid;
 import com.example.jogodavelha.Player;
-import com.example.jodadavelha.R;
+import com.example.jogodavelha.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -215,8 +215,10 @@ public class CreateRoomActivity extends AppCompatActivity {
                         intent.putExtra("myNodePlayer", "player1");
                         intent.putExtra("opponentNodePlayer", "player2");
                         intent.putExtra("roomNumber", createdRoom);
+                        myRef.child("Rooms").child(createdRoom).child("player2").child("name").removeEventListener(valueEventListenerAddRoom);
                         startActivity(intent);
                         finish();
+
                     }
                 }
 

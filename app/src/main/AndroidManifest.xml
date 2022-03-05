@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.jodadavelha">
+    package="com.example.jogodavelha">
 
     <application
         android:allowBackup="true"
@@ -10,31 +10,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JogoDaVelha">
         <activity
-            android:name="com.example.jodadavelha.com.example.jogodavelha.online2playersClasses.Option2"
+            android:name="com.example.jogodavelha.online2playersClasses.Option2"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.jodadavelha.com.example.jogodavelha.online2playersClasses.CreateRoomActivity"
+            android:name="com.example.jogodavelha.online2playersClasses.CreateRoomActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.example.jodadavelha.com.example.jogodavelha.online2playersClasses.ChooseRoomActivity"
+            android:name="com.example.jogodavelha.online2playersClasses.ChooseRoomActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.example.jodadavelha.com.example.jogodavelha.online2playersClasses.AuthActivity"
+            android:name="com.example.jogodavelha.online2playersClasses.AuthActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.example.jodadavelha.com.example.jogodavelha.offline2playersClasses.InputNameActivity"
+            android:name="com.example.jogodavelha.offline2playersClasses.InputNameActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.jodadavelha.com.example.jogodavelha.offline2playersClasses.Option1"
+            android:name="com.example.jogodavelha.offline2playersClasses.Option1"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.jodadavelha.com.example.jogodavelha.OptionalFirstActivity"
+            android:name="com.example.jogodavelha.OptionalFirstActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
