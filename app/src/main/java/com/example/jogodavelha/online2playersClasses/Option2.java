@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -60,9 +61,24 @@ public class Option2  extends GameActivity {
 
 
 
+                if(gameStopped && !opponentPlayer.getName().equals("-")){
+                    mySelfPlayer.setName("-");//Fazendo isso, nenhum if do onDestroy será chamado, o que é importante
+                    recreate();
+                }
+
+                if (opponentPlayer.getName().equals("-")){
+                    gameStopped = true;
+                    AlertDialog.Builder build = new AlertDialog.Builder(Option2.this);
+                    build.setTitle("O Oponente saiu do jogo.\nEstamos aguardando o próximo");
+                    build.setCancelable(false);
+                    ProgressBar progressBar = new ProgressBar(Option2.this);
+                    build.setView(progressBar);
+                    AlertDialog dialog = build.create();
+                    dialog.show();
 
 
-
+                    return;
+                }
                 if(grid.getAddedSimblesLength() > 0){
                     image = findViewById(grid.getCurrentImageId());
                     int row = Integer.parseInt(image.getTransitionName().substring(0, 1));
@@ -75,10 +91,10 @@ public class Option2  extends GameActivity {
                         image.setImageResource(R.drawable.ic_o_letter_svg);
                 }
 
-                if (!someoneWon)
+                if (!gameStopped)
                     checkWinner(grid);
 
-                if(someoneWon && !currentPlayerCode.equals("-")){
+                if(gameStopped && !currentPlayerCode.equals("-")){
                     grid.setCurrentPlayerCode("-");
                 }
                 currentPlayerCode = grid.getCurrentPlayerCode();
@@ -166,7 +182,7 @@ public class Option2  extends GameActivity {
                             }
                         }
                     }
-                    someoneWon = false;
+                    gameStopped = false;
 
 
                     AlertDialog.Builder build = new AlertDialog.Builder(Option2.this);
@@ -255,13 +271,13 @@ public class Option2  extends GameActivity {
     @Override
     public void onDestroy() {
         myRef.child("Rooms").child(roomNumber).removeEventListener(listener);
-        if (opponentPlayer.getName().equals("-") && !mySelfPlayer.getName().equals("-")){
-            myRef.child("Rooms").child(roomNumber).removeValue();
-        }else if(!opponentPlayer.getName().equals("-") && !mySelfPlayer.getName().equals("-")) {
-            mySelfPlayer.setName("-");
-            //mySelfPlayer.setName("##player_leave##");
-            myRef.child("Rooms").child(roomNumber).child(myNodePlayer).setValue(mySelfPlayer);
-        }
+            if (opponentPlayer.getName().equals("-") && !mySelfPlayer.getName().equals("-")){
+                myRef.child("Rooms").child(roomNumber).removeValue();
+            }else if(!opponentPlayer.getName().equals("-") && !mySelfPlayer.getName().equals("-")) {
+                mySelfPlayer.setName("-");
+                myRef.child("Rooms").child(roomNumber).child(myNodePlayer).setValue(mySelfPlayer);
+            }
+
         super.onDestroy();
     }
 

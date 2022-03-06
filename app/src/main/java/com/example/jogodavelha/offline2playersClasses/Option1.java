@@ -1,7 +1,6 @@
 package com.example.jogodavelha.offline2playersClasses;
 
 import android.app.UiModeManager;
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -46,7 +45,7 @@ public class Option1 extends GameActivity {
         int row = Integer.parseInt(transitionName.substring(0,1));
         int column = Integer.parseInt(transitionName.substring(1,2));
 
-        if (grid.getInRowAndColumn(row, column).equals("-") && !someoneWon){
+        if (grid.getInRowAndColumn(row, column).equals("-") && !gameStopped){
             if (this.letraGlobalAtual.equals("x")){
                 image.setImageResource(R.drawable.ic_x_letter_svg);
             }else if(this.letraGlobalAtual.equals("o")){
@@ -62,7 +61,7 @@ public class Option1 extends GameActivity {
 
     @Override
     public void restartGame(View view){
-        someoneWon = false;
+        gameStopped = false;
         this.letraGlobalAtual = extra.getString("simboloInicial");
         if (player1.getUsedSymbol().equals(letraGlobalAtual)){
             textVezDoJogador.setText("É a vez de "+ player1.getName()+".");

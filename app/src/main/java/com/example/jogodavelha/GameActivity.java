@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 public class GameActivity extends AppCompatActivity {
     protected SquareXorOView[] imagemVermelhas;
-    protected boolean someoneWon = false;
+    protected boolean gameStopped = false;
     protected Grid grid;
     protected UiModeManager uiModeManager;
 
@@ -171,15 +171,15 @@ public class GameActivity extends AppCompatActivity {
 
         if (imagemVermelhas[0] != null){
             textVezDoJogador.setText("Opa! Temos um vencedor");
-            someoneWon = true;
+            gameStopped = true;
             for(SquareXorOView imagemVermelha : imagemVermelhas){
                imagemVermelha.setColorFilter(Color.RED);
             }
 
             informarVencedor();
         }
-        if (!someoneWon && grid.getAddedSimblesLength() == 9){
-            someoneWon = true;
+        if (!gameStopped && grid.getAddedSimblesLength() == 9){
+            gameStopped = true;
             informarEmpate();
 
         }
