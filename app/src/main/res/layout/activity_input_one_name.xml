@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/activity_input_name_scene"
-    tools:context="com.example.jogodavelha.offline2playersClasses.InputNameActivity">
-
+    tools:context=".offlinePlayerMachineClasses.InputOneNameActivity">
     <TextView
         android:id="@+id/textoJogador1"
         android:layout_width="wrap_content"
@@ -14,41 +12,13 @@
         android:layout_marginBottom="32dp"
         android:text="@string/texto_jogador1"
         android:textSize="@dimen/text_size"
-        android:layout_marginStart="9px"
         app:layout_constraintBottom_toTopOf="@+id/editJogador1"
         app:layout_constraintStart_toStartOf="@+id/editJogador1"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <TextView
-        android:id="@+id/textoJogador2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:layout_marginStart="9px"
-        android:text="@string/texto_jogador2"
-        android:textSize="@dimen/text_size"
-        app:layout_constraintBottom_toTopOf="@+id/editJogador2"
-        app:layout_constraintStart_toStartOf="@+id/editJogador1"
-        app:layout_constraintTop_toBottomOf="@+id/editJogador1" />
-
     <EditText
         android:id="@+id/editJogador1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:ems="10"
-        android:hint="@string/hint_name"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/textoJogador2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textoJogador1" />
-
-    <EditText
-        android:id="@+id/editJogador2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -59,14 +29,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textoJogador2" />
+        app:layout_constraintTop_toBottomOf="@+id/textoJogador1" />
+
+
 
     <Switch
         android:id="@+id/switchTrocaSimbolo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
-        android:onClick="trocarSimbolo"
         android:text="@string/switch_inverter_simbolo"
         android:textSize="@dimen/switch_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -93,13 +64,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6" />
+        app:layout_constraintGuide_percent="0.5" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="avancar"
         android:text="@string/botao_avancar"
         android:textSize="@dimen/button_text_size"
         app:layout_constraintBottom_toTopOf="@+id/switchTrocaSimbolo"

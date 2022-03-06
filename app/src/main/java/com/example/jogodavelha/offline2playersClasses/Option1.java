@@ -1,5 +1,7 @@
 package com.example.jogodavelha.offline2playersClasses;
 
+import android.app.UiModeManager;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +9,7 @@ import android.view.View;
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.jogodavelha.GameActivity;
+import com.example.jogodavelha.Grid;
 import com.example.jogodavelha.Player;
 import com.example.jogodavelha.R;
 import com.example.jogodavelha.SquareXorOView;
@@ -19,7 +22,7 @@ public class Option1 extends GameActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        grid = new Grid();
         extra = getIntent().getExtras();
         this.letraGlobalAtual = extra.getString("simboloInicial","E");//'E' representa um erro
         player1 = (Player) extra.getSerializable("player1");
@@ -70,7 +73,11 @@ public class Option1 extends GameActivity {
 
         if (grid.getAddedSimblesLength() > 0 && imagemVermelhas[0] != null){
             for(SquareXorOView imagemVermelha : imagemVermelhas){
-                imagemVermelha.setColorFilter(Color.BLACK);
+                if(uiModeManager.getNightMode() == UiModeManager.MODE_NIGHT_YES){
+                    imagemVermelha.setColorFilter(Color.WHITE);
+                } else if(uiModeManager.getNightMode() == UiModeManager.MODE_NIGHT_NO){
+                    imagemVermelha.setColorFilter(Color.BLACK);
+                }
             }
         }
         zerarVezesPreenchidas();

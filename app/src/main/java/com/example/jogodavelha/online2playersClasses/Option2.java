@@ -1,5 +1,6 @@
 package com.example.jogodavelha.online2playersClasses;
 
+import android.app.UiModeManager;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -158,7 +159,11 @@ public class Option2  extends GameActivity {
 
                     if (imagemVermelhas[0] != null){
                         for(SquareXorOView imagemVermelha : imagemVermelhas){
-                            imagemVermelha.setColorFilter(Color.BLACK);
+                            if(uiModeManager.getNightMode() == UiModeManager.MODE_NIGHT_YES){
+                                imagemVermelha.setColorFilter(Color.WHITE);
+                            } else if(uiModeManager.getNightMode() == UiModeManager.MODE_NIGHT_NO){
+                                imagemVermelha.setColorFilter(Color.BLACK);
+                            }
                         }
                     }
                     someoneWon = false;
@@ -254,6 +259,7 @@ public class Option2  extends GameActivity {
             myRef.child("Rooms").child(roomNumber).removeValue();
         }else if(!opponentPlayer.getName().equals("-") && !mySelfPlayer.getName().equals("-")) {
             mySelfPlayer.setName("-");
+            //mySelfPlayer.setName("##player_leave##");
             myRef.child("Rooms").child(roomNumber).child(myNodePlayer).setValue(mySelfPlayer);
         }
         super.onDestroy();

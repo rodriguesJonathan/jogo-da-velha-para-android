@@ -1,6 +1,9 @@
 package com.example.jogodavelha;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.UiModeManager;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +13,7 @@ public class GameActivity extends AppCompatActivity {
     protected SquareXorOView[] imagemVermelhas;
     protected boolean someoneWon = false;
     protected Grid grid;
+    protected UiModeManager uiModeManager;
 
     protected TextView textVezDoJogador;
 
@@ -24,6 +28,7 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        uiModeManager = (UiModeManager) getApplicationContext().getSystemService(Context.UI_MODE_SERVICE);
 
         tabela11 = findViewById(R.id.tabela11); tabela12 = findViewById(R.id.tabela12); tabela13 = findViewById(R.id.tabela13);
         tabela21 = findViewById(R.id.tabela21); tabela22 = findViewById(R.id.tabela22); tabela23 = findViewById(R.id.tabela23);

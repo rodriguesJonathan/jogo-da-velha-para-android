@@ -83,11 +83,11 @@ public class InputNameActivity extends AppCompatActivity {
 
     public void trocarSimbolo(View view){
         if (switchTrocaSimbolo.isChecked()){
-            textoJogador2.setText("O Player 2 será: X");
-            textoJogador1.setText("O Player 1 será: O");
+            textoJogador2.setText("O Jogador 2 será: X");
+            textoJogador1.setText("O Jogador 1 será: O");
         }else{
-            textoJogador1.setText("O Player 1 será: X");
-            textoJogador2.setText("O Player 2 será: O");
+            textoJogador1.setText("O Jogador 1 será: X");
+            textoJogador2.setText("O Jogador 2 será: O");
         }
     }
 }
