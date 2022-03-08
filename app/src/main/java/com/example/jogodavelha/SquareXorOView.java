@@ -4,6 +4,10 @@ import android.app.UiModeManager;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+
+import androidx.annotation.DrawableRes;
 
 public class SquareXorOView extends androidx.appcompat.widget.AppCompatImageView {
     private UiModeManager uiModeManager;
@@ -30,6 +34,14 @@ public class SquareXorOView extends androidx.appcompat.widget.AppCompatImageView
         if(uiModeManager.getNightMode() == UiModeManager.MODE_NIGHT_YES){
             this.setColorFilter(Color.WHITE);
         }
+    }
+
+    @Override
+    public void setImageResource(@DrawableRes int resId) {
+        super.setImageResource(resId);
+        Animation animationZoomIn = AnimationUtils.loadAnimation(getContext(), R.anim.zoom_in);
+        this.startAnimation(animationZoomIn);
+
     }
 
 

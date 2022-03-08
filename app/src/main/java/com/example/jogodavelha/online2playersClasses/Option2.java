@@ -69,8 +69,14 @@ public class Option2  extends GameActivity {
                 if (opponentPlayer.getName().equals("-")){
                     gameStopped = true;
                     AlertDialog.Builder build = new AlertDialog.Builder(Option2.this);
-                    build.setTitle("O Oponente saiu do jogo.\nEstamos aguardando o próximo");
+                    build.setTitle("O Oponente saiu do jogo.\nEstamos aguardando o próximo\nSala: "+roomNumber);
                     build.setCancelable(false);
+                    build.setNegativeButton("Sair", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            finish();
+                        }
+                    });
                     ProgressBar progressBar = new ProgressBar(Option2.this);
                     build.setView(progressBar);
                     AlertDialog dialog = build.create();

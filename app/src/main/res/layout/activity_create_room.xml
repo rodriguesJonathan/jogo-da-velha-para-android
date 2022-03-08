@@ -44,10 +44,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/RadioGroup2"
             app:layout_constraintTop_toBottomOf="@+id/switchSettings">
 
             <TextView
@@ -58,22 +57,29 @@
                 android:text="Escolha o teu símbolo: "
                 android:textSize="@dimen/radio_text_size" />
 
-            <RadioButton
-                android:id="@+id/radioXplayer"
+            <RadioGroup
+                android:id="@+id/RadioGroup11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checked="true"
-                android:text="X"
-                android:textSize="@dimen/radio_text_size" />
+                android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/radioOplayer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="O"
-                android:textSize="@dimen/radio_text_size" />
+                <RadioButton
+                    android:id="@+id/radioXplayer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="X"
+                    android:textSize="@dimen/radio_text_size" />
+
+                <RadioButton
+                    android:id="@+id/radioOplayer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="O"
+                    android:textSize="@dimen/radio_text_size" />
+            </RadioGroup>
         </RadioGroup>
 
         <RadioGroup

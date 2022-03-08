@@ -4,6 +4,8 @@ import android.app.UiModeManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -44,7 +46,6 @@ public class Option1 extends GameActivity {
         String transitionName = view.getTransitionName();
         int row = Integer.parseInt(transitionName.substring(0,1));
         int column = Integer.parseInt(transitionName.substring(1,2));
-
         if (grid.getInRowAndColumn(row, column).equals("-") && !gameStopped){
             if (this.letraGlobalAtual.equals("x")){
                 image.setImageResource(R.drawable.ic_x_letter_svg);
