@@ -15,4 +15,9 @@
         <!-- Customize your theme here. -->
         <item name="android:textViewStyle">@color/white</item>
     </style>
+    <style name="copyStyle">
+        <item name="android:backgroundTint">@color/black</item>
+        <item name="android:tint">@color/white</item>
+    </style>
+
 </resources>

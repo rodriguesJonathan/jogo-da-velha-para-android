@@ -30,7 +30,6 @@ public class Option2  extends GameActivity {
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference();
     private Bundle extra;
-    private String currentPlayerCode;
     private String roomNumber;
     private Player mySelfPlayer;
     private Player opponentPlayer;
@@ -38,6 +37,8 @@ public class Option2  extends GameActivity {
     private String myNodePlayer;
     private String opponentNodePlayer;
     private ValueEventListener listener;
+    private int SimblesLengthLocal = 0;
+    private boolean leftGame = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +61,15 @@ public class Option2  extends GameActivity {
                 opponentPlayer = snapshot.child(opponentNodePlayer).getValue(Player.class);
 
 
+                if(opponentPlayer.getName().equals("-")){
+                    leftGame = true;
+                }
 
-                if(gameStopped && !opponentPlayer.getName().equals("-")){
-                    mySelfPlayer.setName("-");//Fazendo isso, nenhum if do onDestroy será chamado, o que é importante
+                if(leftGame && !opponentPlayer.getName().equals("-")){
                     recreate();
                 }
+
+
 
                 if (opponentPlayer.getName().equals("-")){
                     gameStopped = true;
@@ -74,6 +79,7 @@ public class Option2  extends GameActivity {
                     build.setNegativeButton("Sair", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
+                            leftGame = false;
                             finish();
                         }
                     });
@@ -81,34 +87,35 @@ public class Option2  extends GameActivity {
                     build.setView(progressBar);
                     AlertDialog dialog = build.create();
                     dialog.show();
-
-
                     return;
                 }
-                if(grid.getAddedSimblesLength() > 0){
+                if(grid.getAddedSimblesLength() > 0 && grid.getAddedSimblesLength() != SimblesLengthLocal){
                     image = findViewById(grid.getCurrentImageId());
                     int row = Integer.parseInt(image.getTransitionName().substring(0, 1));
                     int column = Integer.parseInt(image.getTransitionName().substring(1, 2));
                     Log.i("info", "row: "+row+"column: "+column);
                     Log.i("info", grid.getInRowAndColumn(row, column));
-                    if (grid.getInRowAndColumn(row, column).equals("X"))
+                    if (grid.getInRowAndColumn(row, column).equals("X")) {
                         image.setImageResource(R.drawable.ic_x_letter_svg);
-                    else if (grid.getInRowAndColumn(row, column).equals("O"))
+                        SimblesLengthLocal += 1;
+                    }
+                    else if (grid.getInRowAndColumn(row, column).equals("O")) {
                         image.setImageResource(R.drawable.ic_o_letter_svg);
+                        SimblesLengthLocal += 1;
+                    }
                 }
 
                 if (!gameStopped)
                     checkWinner(grid);
 
-                if(gameStopped && !currentPlayerCode.equals("-")){
+                if(gameStopped && !grid.getCurrentPlayerCode().equals("-")){
                     grid.setCurrentPlayerCode("-");
                 }
-                currentPlayerCode = grid.getCurrentPlayerCode();
 
 
-                if (mySelfPlayer.getUserCode().equals(currentPlayerCode)) {
+                if (mySelfPlayer.getUserCode().equals(grid.getCurrentPlayerCode())) {
                     textVezDoJogador.setText("É a tua vez.");
-                } else if(opponentPlayer.getUserCode().equals(currentPlayerCode)) {
+                } else if(opponentPlayer.getUserCode().equals(grid.getCurrentPlayerCode())) {
                     textVezDoJogador.setText("É a vez de " + opponentPlayer.getName() + ".");
                 }
 
@@ -178,7 +185,7 @@ public class Option2  extends GameActivity {
                     ((SquareXorOView) findViewById(R.id.tabela31)).setImageResource(R.drawable.vazio);
                     ((SquareXorOView) findViewById(R.id.tabela32)).setImageResource(R.drawable.vazio);
                     ((SquareXorOView) findViewById(R.id.tabela33)).setImageResource(R.drawable.vazio);
-
+                    SimblesLengthLocal = 0;
                     if (imagemVermelhas[0] != null){
                         for(SquareXorOView imagemVermelha : imagemVermelhas){
                             if(uiModeManager.getNightMode() == UiModeManager.MODE_NIGHT_YES){
@@ -218,7 +225,7 @@ public class Option2  extends GameActivity {
 
     @Override
     public void insertXO(View view){
-        if(currentPlayerCode.equals(mySelfPlayer.getUserCode())){
+        if(grid.getCurrentPlayerCode().equals(mySelfPlayer.getUserCode())){
             grid.setCurrentImageId(view.getId());
 
             String transitionName = view.getTransitionName();
@@ -227,8 +234,7 @@ public class Option2  extends GameActivity {
             if (grid.getInRowAndColumn(row, column).equals("-")){
                 grid.setInRowAndColumn(mySelfPlayer.getUsedSymbol(), row, column);
 
-                currentPlayerCode = (currentPlayerCode.equals("1") ? "2" : "1");
-                grid.setCurrentPlayerCode(currentPlayerCode);
+                grid.setCurrentPlayerCode(grid.getCurrentPlayerCode().equals("1") ? "2" : "1");
 
                 myRef.child("Rooms").child(roomNumber).child("grid").setValue(grid);
 
@@ -236,7 +242,7 @@ public class Option2  extends GameActivity {
                 Toast.makeText(this, "Posicão inválida!!", Toast.LENGTH_SHORT).show();
             }
 
-        }else if(currentPlayerCode.equals(opponentPlayer.getUserCode())){
+        }else if(grid.getCurrentPlayerCode().equals(opponentPlayer.getUserCode())){
             Toast.makeText(this, "Espere teu oponente jogar", Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(this, "O jogo terminou", Toast.LENGTH_SHORT).show();
@@ -277,12 +283,19 @@ public class Option2  extends GameActivity {
     @Override
     public void onDestroy() {
         myRef.child("Rooms").child(roomNumber).removeEventListener(listener);
+        if(!leftGame){
             if (opponentPlayer.getName().equals("-") && !mySelfPlayer.getName().equals("-")){
                 myRef.child("Rooms").child(roomNumber).removeValue();
             }else if(!opponentPlayer.getName().equals("-") && !mySelfPlayer.getName().equals("-")) {
                 mySelfPlayer.setName("-");
-                myRef.child("Rooms").child(roomNumber).child(myNodePlayer).setValue(mySelfPlayer);
+                grid.restart();
+                HashMap<String, Object> map = new HashMap<>();
+                map.put("grid", grid);
+                map.put(myNodePlayer, mySelfPlayer);
+                myRef.child("Rooms").child(roomNumber).updateChildren(map);
             }
+        }
+
 
         super.onDestroy();
     }

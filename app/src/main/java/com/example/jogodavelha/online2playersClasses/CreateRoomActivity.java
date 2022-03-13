@@ -199,7 +199,6 @@ public class CreateRoomActivity extends AppCompatActivity {
             roomReference.child("player2").setValue(player2);
             roomReference.child("restart").child("player1").setValue("-");
             roomReference.child("restart").child("player2").setValue("-");
-            roomReference.child("winner").setValue("-");
 
 
 
@@ -218,7 +217,6 @@ public class CreateRoomActivity extends AppCompatActivity {
                         myRef.child("Rooms").child(createdRoom).child("player2").child("name").removeEventListener(valueEventListenerAddRoom);
                         startActivity(intent);
                         finish();
-
                     }
                 }
 
